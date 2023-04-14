@@ -1,7 +1,14 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/shouye/shouye"
+    "pages/mine/mine",
+    "custom-tab-bar/index",
+    "pages/own_home/own_home",
+    "pages/cust_home/cust_home",
+    "pages/register/register",
+    "pages/addfang/addfang",
+    "pages/addroom/addroom",
+    "pages/room/room"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -19,8 +26,30 @@
     "van-radio": "@vant/weapp/radio/index",
     "van-radio-group": "@vant/weapp/radio-group/index",
     "van-toast": "@vant/weapp/toast/index",
-      "van-tabbar": "@vant/weapp/tabbar/index",
-      "van-tabbar-item": "@vant/weapp/tabbar-item/index"
+    "van-tabbar": "@vant/weapp/tabbar/index",
+    "van-tabbar-item": "@vant/weapp/tabbar-item/index",
+    "van-nav-bar": "@vant/weapp/nav-bar/index",
+    "van-collapse": "@vant/weapp/collapse/index",
+    "van-collapse-item": "@vant/weapp/collapse-item/index",
+    "van-grid": "@vant/weapp/grid/index",
+    "van-grid-item": "@vant/weapp/grid-item/index",
+    "van-area": "@vant/weapp/area/index",
+    "van-picker": "@vant/weapp/picker/index",
+    "van-popup": "@vant/weapp/popup/index"
   },
-  "lazyCodeLoading": "requiredComponents"
+  "lazyCodeLoading": "requiredComponents",
+  "tabBar": {
+    "custom": true,
+    "list": [
+      {
+        "pagePath": "pages/cust_home/cust_home"
+      },
+      {
+        "pagePath": "pages/own_home/own_home"
+      },
+      {
+        "pagePath": "pages/mine/mine"
+      }
+    ]
+  }
 }

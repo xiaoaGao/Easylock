@@ -1,0 +1,14 @@
+<view class="form">
+
+<text style="text-align: center;color: #000000;font-size: 22px;font-weight: bold;height: 10px;">添加小区</text>
+<van-toast id="van-toast" />
+<view style="height: 79px;width: 350px;">
+  <van-cell-group>
+    <van-field model:value="{{ fname }}" clearable label="小区名称" placeholder="请输入小区名称" bind:change="onComp"  />
+    <van-field model:value="{{ location }}" label="地址" placeholder="请输入地址"  bind:change="onComp"/>
+  </van-cell-group>
+</view>
+<view style="height: 300px;width: 200px;">
+  <van-button type="info" size="large" round bind:click="addfang" model:disabled="{{ can }}">添加</van-button>
+</view>
+</view>

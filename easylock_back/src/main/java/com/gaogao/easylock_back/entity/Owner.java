@@ -7,8 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Customer {
-    private Integer cid;
+public class Owner {
+    private Integer oid;
     private String username;
     private String passwd;
     private String realname;

@@ -1,0 +1,23 @@
+<view>
+  <view style="display: flex;margin:10px 10px">
+    <view >
+      <image style="width:110px;height:110px"  src="{{imgsrc}}" />
+    </view>
+    <view style="margin: 20px 40px">
+      <view style="font-size:20px;color: #333333;">
+        {{realname}}
+      </view>
+      <view style="margin-top: 30px;font-size: 15px;color: #999999;">
+        用户名:{{username}}
+      </view>
+    </view>
+  </view>
+  <van-cell-group style="margin-top:50px;">
+    <van-cell title="修改名称"  icon="edit"/>
+    <van-cell title="修改密码"  icon="lock"/>
+    <van-cell title="退出登陆"  icon="close" bindtap="unload" />
+
+  </van-cell-group>
+
+
+</view>

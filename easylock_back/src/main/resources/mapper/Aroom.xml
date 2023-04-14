@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gaogao.easylock_back.mapper.AroomMapper">
+    <update id="update">
+        update aroom
+        <set>
+            <if test="mac!=null">
+                mac=#{mac},
+            </if>
+            <if test="roomnum!=null">
+                roomnum=#{roomnum},
+            </if>
+            <if test="state!=null">
+                state=#{state},
+            </if>
+            <if test="standard!=null">
+                standard=#{standard},
+            </if>
+            <if test="jieshao!=null">
+                jieshao=#{jieshao}
+            </if>
+        </set>
+        <where>
+            rid=#{rid}
+        </where>
+    </update>
+</mapper>

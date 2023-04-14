@@ -1,0 +1,29 @@
+<view class="form">
+<text style="text-align: center;color: #000000;font-size: 22px;font-weight: bold;height: 10px;">添加房间</text>
+<van-toast id="van-toast" />
+<view style="height: 200px;width: 350px;">
+  <van-cell-group>
+    <van-field model:value="{{ roomnum }}"required  clearable label="房间号" placeholder="请输入房间号"   />
+    <van-field model:value="{{ standard }}"required  readonly label="房间规格" placeholder="点击选择房间规格"  bindtap="toshow"bind:change="onComp"/>
+    <van-field
+    value="{{ jieshao }}"
+    label="房间介绍"
+    type="textarea"
+    placeholder="请输入房间介绍（200字以内）"
+    maxlength="200"
+    autosize
+  />
+  </van-cell-group>
+</view>
+
+
+<view style="width: 200px;">
+  <van-button type="info" size="large" round bind:click="onAdd">添加</van-button>
+</view>
+<van-popup show="{{ show }}" position="top" round
+  bind:close="onClose" position="bottom">
+<van-picker show-toolbar title="房间规格" columns="{{ columns }}" bind:change="onChange" bind:cancel="onClose" bind:confirm="onConfirm"/>
+
+</van-popup>
+
+</view>

@@ -1,0 +1,29 @@
+<view class="form">
+
+  <text style="text-align: center;color: #000000;font-size: 22px;font-weight: bold;height: 10px;">注册</text>
+  <van-toast id="van-toast" />
+  <view style="height: 210px;width: 350px;">
+    <van-cell-group>
+      <van-field model:value="{{ username }}" clearable label="用户名" placeholder="请输入用户名" bind:change="onComp"  />
+      <van-field model:value="{{ passwd }}" label="密码" placeholder="请输入密码"  bind:change="onComp"/>
+      <van-field model:value="{{ realname }}" clearable label="真实姓名" placeholder="请输入真实姓名"  bind:change="onComp" />
+      <van-field model:value="{{ idnum }}"  label="身份证号码" placeholder="请输入身份证号码"  bind:change="onComp"/>
+      <van-field model:value="{{ phone }}" label="手机号" placeholder="请输入手机号"  bind:change="onComp"/>
+    </van-cell-group>
+  </view>
+  <view style="height: 20px;text-align: center;color: #000000;font-size: 17px;font-weight: bold;">
+    <van-radio-group value="{{ status }}" bind:change="onChangesex" direction="horizontal">
+      性   别：
+      <van-radio name="男">男</van-radio>
+      <van-radio name="女" style="margin-left: 10px;">女</van-radio>
+    </van-radio-group>
+    <van-radio-group value="{{ status }}" bind:change="onChangesf" direction="horizontal">
+      注册身份：
+      <van-radio name="1">房客</van-radio>
+      <van-radio name="2" style="margin-left: 10px;">房东</van-radio>
+    </van-radio-group>
+  </view>
+  <view style="height: 150px;width: 200px;">
+    <van-button type="info" size="large" round bind:click="regist" model:disabled="{{ can }}">注册</van-button>
+  </view>
+</view>
