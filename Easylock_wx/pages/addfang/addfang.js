@@ -1,4 +1,6 @@
 import Toast from '@vant/weapp/toast/toast';
+const app = getApp();
+const backurl = app.globalData.backurl;
 Page({
   data: {
     fname:'',
@@ -30,7 +32,7 @@ Page({
     var that=this;
     var me=wx.getStorageSync('me')
       wx.request({
-        url: 'http://localhost:9090/fangyuan/addfang',
+        url: backurl+'/fangyuan/addfang',
         method:'POST',
         data:{
           oid:me.oid,

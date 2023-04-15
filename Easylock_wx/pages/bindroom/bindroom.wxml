@@ -1,0 +1,11 @@
+
+<view style="height: 40px;margin: 20px;font-size:20px;color: #333333;">绑定门锁<van-loading wx:if="{{loadshow}}" size="20px" color="blue"/> </view>
+<van-cell-group inset>
+<view wx:for="{{locks}}" wx:for-index="index" wx:for-item="item">
+
+  <van-cell title="{{item.deviceId}}" value="信号强度：{{item.RSSI}}" size="large" label="点击绑定该锁" icon="lock" bindtap="bind" data-deviceid="{{item.deviceId}}"/>
+</view>
+</van-cell-group>
+
+
+<van-toast id="van-toast" />

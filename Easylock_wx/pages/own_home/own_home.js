@@ -1,3 +1,6 @@
+const app = getApp();
+const backurl = app.globalData.backurl;
+
 Page({
 
   data: {
@@ -40,7 +43,7 @@ this.loadall()
     var me=wx.getStorageSync('me');
     wx.request({
       //获取用户的所有房源小区
-      url: 'http://localhost:9090/fangyuan/findallfang/'+me.oid,
+      url: backurl+'/fangyuan/findallfang/'+me.oid,
       method: 'GET',
       success(res) {
         // console.log(res)
@@ -69,7 +72,7 @@ this.loadall()
     var me=wx.getStorageSync('me');
     wx.request({
       //获取用户的所有房间
-      url: 'http://localhost:9090/aroom/getAllroom/'+me.oid,
+      url: backurl+'/aroom/getAllroom/'+me.oid,
       method: 'GET',
       success(res) {
         // console.log(res)

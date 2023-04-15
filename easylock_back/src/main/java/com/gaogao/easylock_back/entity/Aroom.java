@@ -12,7 +12,7 @@ public class Aroom {
     private Integer oid;
     private Integer state;
     private Integer fid;
-    private String mac;
+    private String deviceid;
     private String roomnum;
     private String standard;
     private String jieshao;

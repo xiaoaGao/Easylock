@@ -5,8 +5,8 @@
     <update id="update">
         update aroom
         <set>
-            <if test="mac!=null">
-                mac=#{mac},
+            <if test="deviceid!=null">
+                deviceid=#{deviceid},
             </if>
             <if test="roomnum!=null">
                 roomnum=#{roomnum},

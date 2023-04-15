@@ -1,4 +1,7 @@
 import Toast from '@vant/weapp/toast/toast';
+const app = getApp();
+const backurl = app.globalData.backurl;
+
 Page({
 
   data: {
@@ -69,7 +72,7 @@ Page({
     var that=this;
     if(that.data.status==1){//房客注册
       wx.request({
-        url: 'http://localhost:9090/customer/register',
+        url: backurl+'/customer/register',
         method:'POST',
         data:{
           username:that.data.username,
@@ -98,7 +101,7 @@ Page({
     }
     else if(that.data.status==2){//房东注册
       wx.request({
-        url: 'http://localhost:9090/owner/register',
+        url: backurl+'/owner/register',
         method:'POST',
         data:{
           username:that.data.username,

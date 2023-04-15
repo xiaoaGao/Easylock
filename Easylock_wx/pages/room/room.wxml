@@ -8,7 +8,7 @@
 
 <view >
   <van-grid column-num="3">
-  <van-grid-item  text="绑定门锁" icon="setting-o" />
+  <van-grid-item  text="绑定门锁" icon="setting-o" bindtap="tobind"/>
   <van-grid-item  text="钥匙分配" icon="vip-card-o" />
   <van-grid-item  text="解除门锁绑定" icon="revoke" />
   <van-grid-item  text="开门记录" icon="todo-list-o" />

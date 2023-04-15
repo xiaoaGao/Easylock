@@ -1,3 +1,6 @@
+const app = getApp();
+const backurl = app.globalData.backurl;
+
 Page({
 
   data: {

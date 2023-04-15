@@ -1,15 +1,19 @@
 {
   "pages": [
+    "pages/bindroom/bindroom",
     "pages/index/index",
     "pages/mine/mine",
     "custom-tab-bar/index",
     "pages/own_home/own_home",
     "pages/cust_home/cust_home",
     "pages/register/register",
+    
     "pages/addfang/addfang",
     "pages/addroom/addroom",
     "pages/room/room",
     "pages/givekey/givekey"
+    
+    
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -36,7 +40,8 @@
     "van-grid-item": "@vant/weapp/grid-item/index",
     "van-area": "@vant/weapp/area/index",
     "van-picker": "@vant/weapp/picker/index",
-    "van-popup": "@vant/weapp/popup/index"
+    "van-popup": "@vant/weapp/popup/index",
+    "van-transition": "@vant/weapp/transition/index"
   },
   "lazyCodeLoading": "requiredComponents",
   "tabBar": {
