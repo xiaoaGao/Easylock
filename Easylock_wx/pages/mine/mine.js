@@ -4,6 +4,7 @@ Page({
     realname:'',
     username:'',
     gender:'',
+    phone:'',
     imgsrc:'../../statics/icons/man.png',
     status:0,
   },
@@ -20,7 +21,8 @@ Page({
     that.setData({
       username:me.username,
       realname:me.realname,
-      gender:me.gender
+      gender:me.gender,
+      phone:me.phone
     })
     if(that.data.gender=='女'){
       that.setData({

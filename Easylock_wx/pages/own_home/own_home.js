@@ -1,8 +1,8 @@
 Page({
 
   data: {
-    zaizhu:1,
-    kongfang:2,
+    zaizhu:0,
+    kongfang:0,
     fangyuans:[
       // {fid:1,
       //   fname:"清华苑",
@@ -18,10 +18,24 @@ Page({
 
   //每个tabbar页面要加
   onShow: function () {
-    console.log('mine')
+
+    console.log('onshow')
     this.getTabBar().init(0);
+    this.loadall()
   },
-  onLoad:function(){
+  
+  shuaxin(){
+this.loadall()
+  },
+  loadall(){
+    this.setData({
+      fangyuans:[],
+      zaizhu:0,
+      kongfang:0
+    })
+    this.loadfang();
+  },
+  loadfang(){
     var that=this;
     var me=wx.getStorageSync('me');
     wx.request({
@@ -29,7 +43,7 @@ Page({
       url: 'http://localhost:9090/fangyuan/findallfang/'+me.oid,
       method: 'GET',
       success(res) {
-        console.log(res)
+        // console.log(res)
         if (res.data.code == 1) {
           // console.log(res.data.data.length)
           var fs=[]
@@ -40,29 +54,45 @@ Page({
               arooms:[]
             })
           }
-          console.log(fs)
+          // console.log(fs)
           that.setData({
             fangyuans:fs
           })
         }
+        //解决异步问题
+        that.loadroom();
       }
     })
+  },
+  loadroom(){
+    var that=this;
+    var me=wx.getStorageSync('me');
     wx.request({
       //获取用户的所有房间
       url: 'http://localhost:9090/aroom/getAllroom/'+me.oid,
       method: 'GET',
       success(res) {
-        console.log(res)
+        // console.log(res)
+        
         if (res.data.code == 1) {
-          console.log(res.data)
+          // console.log(res.data)
           var rs=that.data.fangyuans;
           for (var i = 0; i < res.data.data.length; i++) {
             rs.forEach((fang,idx)=>{
               // console.log(fang)
                 if(fang.fid==res.data.data[i].fid){
                   fang.arooms.push({
+                    rid:res.data.data[i].rid,
                     roomnum:res.data.data[i].roomnum,
                     state:res.data.data[i].state
+                  })
+                  if(res.data.data[i].state==1)
+                    that.setData({
+                      zaizhu:that.data.zaizhu+1
+                    })
+                  else
+                  that.setData({
+                    kongfang:that.data.kongfang+1
                   })
                   // console.log(res.data.data[i].roomnum)
                 }
@@ -71,13 +101,10 @@ Page({
           that.setData({
             fangyuans:rs
           })
-          console.log(that.data.fangyuans)
+          // console.log(that.data.fangyuans)
         }
       }
     })
-  },
-  loadall(){
-    
   },
   onChange(event) {
     this.setData({
@@ -91,6 +118,12 @@ Page({
   },
   onClickRight(){
 
+  },
+  toroom(e){
+    wx.navigateTo({
+      //带参数跳转到其他页面
+      url: '../room/room?rid='+e.currentTarget.dataset.rid+"&roomnum="+e.currentTarget.dataset.roomnum
+    })
   },
   toaddroom(e){
     wx.navigateTo({

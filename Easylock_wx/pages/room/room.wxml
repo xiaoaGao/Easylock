@@ -1,2 +1,20 @@
-<!--pages/room/room.wxml-->
-<text>pages/room/room.wxml</text>
+<view class="form">
+
+<view style="text-align: center;color: #000000;font-size: 22px;font-weight: bold;height: 5px;">
+<view>房间号：{{roomnum}}</view>
+</view>
+
+<van-button type="primary" round icon="lock">立刻开门</van-button>
+
+<view >
+  <van-grid column-num="3">
+  <van-grid-item  text="绑定门锁" icon="setting-o" />
+  <van-grid-item  text="钥匙分配" icon="vip-card-o" />
+  <van-grid-item  text="解除门锁绑定" icon="revoke" />
+  <van-grid-item  text="开门记录" icon="todo-list-o" />
+  <van-grid-item  text="删除此房间" icon="delete-o" />
+  <van-grid-item  text="修改房间信息" icon="font-o" />
+</van-grid>
+</view>
+
+</view>

@@ -1,12 +1,20 @@
-<van-nav-bar title="在住：{{zaizhu}} 空房：{{kongfang}}" left-text="添加小区" right-text="管理" bind:click-left="onClickLeft" bind:click-right="onClickRight" />
+<van-nav-bar title="在住：{{zaizhu}} 空房：{{kongfang}}" left-text="添加小区" right-text="刷新" bind:click-left="onClickLeft" bind:click-right="shuaxin" />
 <van-collapse value="{{ activeNames }}" bind:change="onChange">
   <view wx:for="{{fangyuans}}" wx:for-index="index" wx:for-item="item">
     <van-collapse-item title="{{item.fname}}" name="{{index}}" >
-      <van-grid gutter="{{ 10 }}">
-        <van-grid-item icon="home-o" text="{{room.roomnum}}" wx:for="{{ item.arooms }}" wx:for-item="room" icon-color="{{room.state==1?'green':'red'}}" />
+<view>
+  <van-grid gutter="{{ 10 }}">
+        
+        <van-grid-item icon="home-o" text="{{room.roomnum}}" wx:for="{{ item.arooms }}" wx:for-item="room" icon-color="{{room.state==0?'green':'red'}}" bindtap="toroom" data-rid="{{room.rid}}" data-roomnum="{{room.roomnum}}"/>
+      
+      
       
         <van-grid-item icon="add-o" text="添加" bindtap="toaddroom" data-fid="{{item.fid}}"/>
-      </van-grid>
+      
+      
+    </van-grid>
+</view>
+      
      
     </van-collapse-item>
   </view>
