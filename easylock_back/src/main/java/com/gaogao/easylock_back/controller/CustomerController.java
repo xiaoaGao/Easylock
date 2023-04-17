@@ -18,11 +18,16 @@ public class CustomerController {
     public Result<?> register(@RequestBody Customer customer){
         //注册
         if (customerService.isExist(customer)){
-            return Result.error("-1","用户名已存在！");
+            return Result.error("0","用户名已存在！");
+        }
+        Customer res=customerMapper.selectOneByphone(customer.getPhone());
+        if (res!=null){
+            return Result.error("0","该手机号已注册！");
         }
         customerService.save(customer);
         return Result.success("1","注册成功！");
     }
+
     @PostMapping("/login")
     public Result<?> login(@RequestBody Customer customer){
         //登陆

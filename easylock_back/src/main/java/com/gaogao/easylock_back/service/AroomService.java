@@ -22,9 +22,25 @@ public class AroomService {
         }
     }
     public boolean isExist(@RequestBody Aroom aroom){
-        //判断用户名是否存在
+        //添加房间时判断房间名是否存在
         Aroom res = aroomMapper.isexist(aroom.getRoomnum(),aroom.getFid());
         if (res==null){
+            return false;
+        }
+        return true;
+    }
+    public boolean isExist2(@RequestBody Aroom aroom){
+        //修改房间信息时判断用户名是否存在
+        Aroom res = aroomMapper.isexist2(aroom.getRoomnum(),aroom.getFid(),aroom.getRid());
+        if (res==null){
+            return false;
+        }
+        return true;
+    }
+    public boolean isliving(Integer rid){
+        //判断是否有人在住
+        Aroom res = aroomMapper.isliving(rid);
+        if (res.getState()==0){
             return false;
         }
         return true;

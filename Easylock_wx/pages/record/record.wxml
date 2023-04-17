@@ -1,0 +1,19 @@
+<view style="height: 40px;margin: 20px;font-size:20px;color: #333333;">开锁记录</view>
+
+<scroll-view enhanced :show-scrollbar="false">
+  <van-cell-group inset>
+    <view wx:for="{{records}}" wx:for-index="index" wx:for-item="item">
+
+      <!-- <van-cell title="{{item.realname}}" value="{{item.type}}" size="large" label="{{item.time}}" icon="todo-list-o" />
+      <van-tag type="primary">{{item.phone}}</van-tag> -->
+      <van-cell value="{{item.type}}" icon="todo-list-o" label="{{item.time}}">
+        <view slot="title">
+          <view class="van-cell-text">{{item.realname}}</view>
+          <van-tag type="primary">{{item.phone}}</van-tag>
+        </view>
+      </van-cell>
+    </view>
+  </van-cell-group>
+
+</scroll-view>
+<van-toast id="van-toast" />

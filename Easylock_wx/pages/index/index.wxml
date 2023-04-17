@@ -1,4 +1,4 @@
-<view class="form">
+<view class="form" >
 
 <text style="text-align: center;color: #000000;font-size: 22px;font-weight: bold;">欢迎使用，锁管家！</text>
 <van-toast id="van-toast" />

@@ -4,14 +4,8 @@
     <van-collapse-item title="{{item.fname}}" name="{{index}}" >
 <view>
   <van-grid gutter="{{ 10 }}">
-        
         <van-grid-item icon="home-o" text="{{room.roomnum}}" wx:for="{{ item.arooms }}" wx:for-item="room" icon-color="{{room.state==0?'green':'red'}}" bindtap="toroom" data-rid="{{room.rid}}" data-roomnum="{{room.roomnum}}"/>
-      
-      
-      
         <van-grid-item icon="add-o" text="添加" bindtap="toaddroom" data-fid="{{item.fid}}"/>
-      
-      
     </van-grid>
 </view>
       

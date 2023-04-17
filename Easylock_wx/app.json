@@ -1,19 +1,19 @@
 {
   "pages": [
-    "pages/bindroom/bindroom",
+    "pages/givekey/givekey",
     "pages/index/index",
     "pages/mine/mine",
     "custom-tab-bar/index",
     "pages/own_home/own_home",
     "pages/cust_home/cust_home",
     "pages/register/register",
-    
+    "pages/bindroom/bindroom",
     "pages/addfang/addfang",
     "pages/addroom/addroom",
     "pages/room/room",
-    "pages/givekey/givekey"
     
-    
+    "pages/editroom/editroom",
+    "pages/record/record"
   ],
   "window": {
     "backgroundTextStyle": "light",

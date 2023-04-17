@@ -12,7 +12,7 @@ Page({
     jieshao:'',
     columns: ['大床房', '双床房', '电竞房', '大套房'],
     show:false,
-    fid:''
+    rid:''
   },
 
   onClose() {
@@ -41,16 +41,14 @@ Page({
       Toast("必填项未填写");
     }
     else{
-      var me=wx.getStorageSync('me')
       wx.request({
-        url: backurl+'/aroom/addroom',
+        url: backurl+'/aroom/xiugai',
         method: 'POST',
         data: {
-          oid:me.oid,
+          rid:that.data.rid,
           roomnum:that.data.roomnum,
           standard:that.data.standard,
           jieshao:that.data.jieshao,
-          fid:that.data.fid
         },
         success(res) {
           console.log(res);
@@ -71,10 +69,10 @@ Page({
   onLoad: function (options) {       //options用于接收上个页面传递过来的参数
       var that = this;
       that.setData({ 
-     fid: options.fid,     
-     roomnum:'',
-     standard:'',
-      jieshao:'',
+      rid:options.rid,
+     roomnum:options.roomnum,
+     standard:options.standard,
+      jieshao:options.jieshao
       })
 
       }

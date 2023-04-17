@@ -131,6 +131,7 @@ this.loadall()
   toaddroom(e){
     wx.navigateTo({
       //带参数跳转到其他页面
+      //pagetype=1表示增加房间跳转
       url: '../addroom/addroom?fid='+e.currentTarget.dataset.fid,
     })
   // console.log(e.currentTarget.dataset.fid)

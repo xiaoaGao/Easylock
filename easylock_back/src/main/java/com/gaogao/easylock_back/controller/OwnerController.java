@@ -17,10 +17,14 @@ public class OwnerController {
     private OwnerService ownerService;
     @PostMapping("/register")
     public Result<?> register(@RequestBody Owner owner){
-        //注册F
+        //注册
         Owner res = ownerMapper.selectOneByusername(owner.getUsername());
         if (res!=null){
-            return Result.error("-1","用户名已存在！");
+            return Result.error("0","用户名已存在！");
+        }
+        res=ownerMapper.selectOneByphone(owner.getPhone());
+        if (res!=null){
+            return Result.error("0","该手机号已注册！");
         }
         ownerService.save(owner);
         return Result.success("1","注册成功！");

@@ -59,4 +59,10 @@ public class Result<T> {
         result.setMsg(msg);
         return result;
     }
+    public static <T> Result<T> error(T data,String msg){
+        Result result=new Result<>();
+        result.setCode("0");
+        result.setMsg(msg);
+        return result;
+    }
 }

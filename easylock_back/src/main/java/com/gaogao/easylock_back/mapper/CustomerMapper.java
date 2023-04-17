@@ -21,6 +21,9 @@ public interface CustomerMapper {
     @Delete("delete from customer where cid=#{cid}")
     Integer deleteById(@Param("cid") Integer cid);
 
+    @Select("SELECT * FROM customer where phone=#{phone}")
+    Customer selectOneByphone(@Param("phone") String phone);
+
     @Select("SELECT * FROM CUSTOMER where username=#{username}")
     Customer selectOneByusername(@Param("username") String username);
 

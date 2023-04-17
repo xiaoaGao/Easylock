@@ -5,6 +5,7 @@ import com.gaogao.easylock_back.entity.Aroom;
 import com.gaogao.easylock_back.mapper.AroomMapper;
 import com.gaogao.easylock_back.service.AroomService;
 import com.gaogao.easylock_back.service.FangyuanService;
+import com.gaogao.easylock_back.service.UnlockrecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +20,9 @@ public class AroomController {
     private AroomService aroomService;
     @Autowired
     private FangyuanService fangyuanService;
+    @Autowired
+    private UnlockrecordService unlockrecordService;
+
     @PostMapping("/addroom")
     public Result<?> addroom(@RequestBody Aroom aroom){
         //添加房间
@@ -39,6 +43,9 @@ public class AroomController {
     @PostMapping("/xiugai")
     public Result<?> xiugai(@RequestBody Aroom aroom){
         //修改房间信息
+        if(aroomService.isExist2(aroom)){
+            return Result.success("0","房间号重复！");
+        }
         Integer res=aroomService.save(aroom);
         if(res==0)
             return Result.success("0","修改失败！");
@@ -56,11 +63,14 @@ public class AroomController {
         List<Aroom> a=aroomMapper.getAllroom(oid);
         return Result.success(a,"查找成功！");
     }
-    @DeleteMapping("/delete/{rid}")
-    public Integer delete(@PathVariable Integer rid){
-        return aroomMapper.deleteById(rid);
+    //查找单个房间的信息
+    @GetMapping("/getroom/{rid}")
+    public  Result<?> getroombyid(@PathVariable Integer rid){
+        Aroom a=aroomMapper.getroombyid(rid);
+        if(a.getDeviceid()==null)
+            return Result.error(a,"该房间未绑定");
+        return Result.success(a,"该房间已绑定！");
     }
-
     @PostMapping("/bind")
     public Result<?> bind(@RequestBody Aroom aroom){
         //修改房间信息
@@ -69,5 +79,33 @@ public class AroomController {
         if(res==0)
             return Result.success("0","绑定失败！");
         return Result.success("1","绑定成功！");
+    }
+//    @GetMapping("/isbind/{rid}")
+//    public  Result<?> isbind(@PathVariable Integer rid){
+//        Aroom a=aroomMapper.getdeviceidByrid(rid);
+//        if(a==null)
+//            return Result.error("0","该房间未绑定");
+//        return Result.success(a,"该房间已绑定！");
+//    }
+    @PostMapping("/unbind/{rid}")
+    public  Result<?> unbind(@PathVariable Integer rid){
+        Integer a=aroomMapper.unbind(rid);
+        if(a==1)
+            return Result.error("1","解绑成功");
+        return Result.success(a,"解绑失败！");
+    }
+    @DeleteMapping("/deleteroom/{rid}")
+    public Result<?> deleteroom(@PathVariable Integer rid){
+        if(aroomService.isliving(rid)){
+            return Result.error("0","有人在住，无法删除！");
+        }
+        else{
+            Integer a=aroomMapper.deleteById(rid);
+            unlockrecordService.deleterecord(rid);
+            if(a==1)
+                return Result.success("1","删除成功！");
+            else
+                return Result.error("0","删除失败！");
+        }
     }
 }

@@ -10,15 +10,15 @@ Page({
     'deviceId': '',
     'serviceId': '',
     'characteristicId': '',
-    'locks': [{
-      deviceId: '11',
-      RSSI: -55
-    }],
+    'locks': [
+      // {deviceId: '11',RSSI: -55}
+    ],
     loadshow: true,
     rid: '',
     roomnum: '',
-    startbind:false//为true时可以进行绑定操作
+    startbind: false //为true时可以进行绑定操作
   },
+
   onLoad: function (options) {
     //  console.log(options)
     var that = this;
@@ -28,13 +28,12 @@ Page({
     })
     that.forbind();
   },
-  onUnload: function () {
-    //页面卸载时
-    //断开蓝牙连接
-    wx.closeBLEConnection(that.data.roomnum)
-    //关闭蓝牙适配器
-    wx.closeBluetoothAdapter()
-  },
+onUnload(){
+//断开蓝牙连接
+wx.closeBLEConnection(that.data.deviceId)
+//关闭蓝牙适配器
+wx.closeBluetoothAdapter()
+},
   forbind() {
     //绑定界面使用
     var that = this;
@@ -43,7 +42,7 @@ Page({
       res.devices.forEach((device) => {
         // 这里可以做一些过滤
         console.log('Device Found', device)
-        if (device.name === "EASYLOCK") {
+        if (device.name === "EASYLOCK"||device.localName === "EASYLOCK") {
           // 找到设备开始连接
           console.log(device.deviceId)
           // this.bleConnection(device.deviceId);
@@ -96,29 +95,64 @@ Page({
     var that = this;
     let deviceid = e.currentTarget.dataset.deviceid
     console.log(deviceid)
+    //关闭搜索图标
     that.setData({
       loadshow: false
     })
     Toast.loading({
       message: '绑定中...',
       forbidClick: true,
-      duration:0,//持续时间。0表示不会消失
+      duration: 0, //持续时间。0表示不会消失
     });
     this.bleConnection(deviceid);
     wx.stopBluetoothDevicesDiscovery()
-    
+
     setTimeout(function () {
-      var buffer = that.stringToBytes("bd101")
+      //绑定门锁协议，传入房间号
+      var msg = 'bd' + that.data.roomnum
+      var buffer = that.stringToBytes(msg)
       wx.writeBLECharacteristicValue({
-        deviceId:that.data.deviceId,
-        serviceId:that.data.serviceId,
-        characteristicId:that.data.characteristicId,
+        deviceId: that.data.deviceId,
+        serviceId: that.data.serviceId,
+        characteristicId: that.data.characteristicId,
         value: buffer,
       })
       console.log("绑定成功")
-      }, 7000)
-    
-    
+      wx.request({
+        url: backurl + '/aroom/bind',
+        method: 'POST',
+        data: {
+          rid: that.data.rid,
+          deviceid: deviceid
+        },
+        success(res) {
+          console.log(res);
+          if (res.data.code == 1) {
+            //断开蓝牙连接
+            wx.closeBLEConnection(that.data.deviceId)
+            //关闭蓝牙适配器
+            wx.closeBluetoothAdapter()
+            // wx.navigateBack() //返回上一层
+            const pages = getCurrentPages();
+            // const currPage = pages[pages.length - 1]; //当前页面
+            const prePage = pages[pages.length - 2]; //上一个页面 
+            /**
+             * 直接调用上一个页面的setData()方法，把数据存到上一个页面中去
+             * 不需要页面更新
+             */
+            console.log(pages)
+            prePage.setData({
+              type: 1
+            })
+            wx.navigateBack() //返回上一层
+          } else {
+            console.log("传送后端失败")
+          }
+        }
+      })
+    }, 7000)
+
+
     // that.bleConnection(deviceid);
     // wx.stopBluetoothDevicesDiscovery(); //停止搜索
     // console.log("绑定成功")

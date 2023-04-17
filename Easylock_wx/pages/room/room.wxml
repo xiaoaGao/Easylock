@@ -2,19 +2,23 @@
 
 <view style="text-align: center;color: #000000;font-size: 22px;font-weight: bold;height: 5px;">
 <view>房间号：{{roomnum}}</view>
+<van-tag type="success" size="large">{{standard}}</van-tag>
 </view>
+<van-button type="primary" round icon="lock" bindtap="unlock">立刻开门</van-button>
 
-<van-button type="primary" round icon="lock">立刻开门</van-button>
-
-<view >
-  <van-grid column-num="3">
-  <van-grid-item  text="绑定门锁" icon="setting-o" bindtap="tobind"/>
-  <van-grid-item  text="钥匙分配" icon="vip-card-o" />
-  <van-grid-item  text="解除门锁绑定" icon="revoke" />
-  <van-grid-item  text="开门记录" icon="todo-list-o" />
-  <van-grid-item  text="删除此房间" icon="delete-o" />
-  <van-grid-item  text="修改房间信息" icon="font-o" />
+<view style="width: 100%;">
+  <van-grid column-num="3" >
+  <van-grid-item  text="绑定门锁" icon="exchange" bindtap="tobind" wx:if="{{!isbind}}"/>
+  <van-grid-item  text="钥匙分配" icon="vip-card-o" wx:if="{{isbind}}" bindtap="togivekey"/>
+  <van-grid-item  text="解除门锁绑定" icon="revoke" wx:if="{{isbind}}" bindtap="unbind" />
+  <van-grid-item  text="开门记录" icon="todo-list-o" wx:if="{{isbind}}" bindtap="torecord"/>
+  <van-grid-item  text="房客请求" icon="chat-o" wx:if="{{isbind}}" />
+  <van-grid-item  text="删除此房间" icon="delete-o" bindtap="deleteroom"/>
+  <van-grid-item  text="修改房间信息" icon="font-o" bindtap="toeditroom"/>
+  
 </van-grid>
 </view>
 
 </view>
+<van-toast id="van-toast" />
+<van-dialog id="van-dialog" />
