@@ -1,32 +1,30 @@
-<van-tabs active="{{ active }}">
+<van-tabs active="{{ active }}" color="#004299">
   <van-tab title="时间段钥匙">
-  
+
     <van-cell-group>
-      <van-cell >
+      <van-cell>
         <view slot="title">
-          <view class="van-cell-text">选择房客数量:</view>
+          <view class="van-cell-text" >选择房客数量:</view>
         </view>
-          <view class="van-cell-text"><van-stepper value="{{ totalcust }}" bind:change="stepchange" max="3"  long-press="false"/></view>
+        <view class="van-cell-text">
+          <van-stepper disable-input value="{{ totalcust }}" bind:change="stepchange" max="3" long-press="false" />
+        </view>
       </van-cell>
       <view wx:for="{{customers}}" wx:for-index="index" wx:for-item="item">
-        <van-field model:value="{{ item.phone }}"  label="房客{{index+1}}手机号" placeholder="请输入房客手机号码" bind:change="onComp"  data-which="{{index}}0"/>
-        <van-field model:value="{{ item.realname }}" clearable label="房客{{index+1}}真名" placeholder="请输入真实姓名"  bind:change="onComp" data-which="{{index}}1"/>
-        <van-field model:value="{{ item.idnum }}"  label="房客{{index+1}}身份证" placeholder="请输入身份证号码"  bind:change="onComp"data-which="{{index}}2"/>
+        <van-field model:value="{{ item.phone }}" label="房客{{index+1}}手机号" placeholder="请输入房客手机号码" bind:change="onComp" data-which="{{index}}0" />
+        <van-field model:value="{{ item.realname }}" clearable label="房客{{index+1}}真名" placeholder="请输入真实姓名" bind:change="onComp" data-which="{{index}}1" />
+        <van-field model:value="{{ item.idnum }}" label="房客{{index+1}}身份证" placeholder="请输入身份证号码" bind:change="onComp" data-which="{{index}}2" />
       </view>
-      <van-field model:value="{{  }}"  label="" placeholder="请输入房客手机号码" bind:change="onComp" />
-  </van-cell-group>
-  <van-button type="info" size="large" round bind:click="regist" model:disabled="{{ can }}">分发</van-button>
+      <van-cell title="选择日期区间" value="{{ day }}" bind:click="DisplayCalendar" />
+      <van-calendar color="#004299"   show="{{ calendarshow }}" type="range" bind:close="onClose" bind:confirm="onConfirm" />
+    </van-cell-group>
+    <van-button color="#004299" size="large" round bindtap="give" >分发</van-button>
   </van-tab>
+
   <van-tab title="密码次数钥匙">内容 2
-  
+
   </van-tab>
 
 </van-tabs>
 
 <van-toast id="van-toast" />
-
-
-  
-
-
-

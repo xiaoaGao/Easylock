@@ -1,5 +1,6 @@
 package com.gaogao.easylock_back.service;
 
+import com.gaogao.easylock_back.entity.Aroom;
 import com.gaogao.easylock_back.entity.Fangyuan;
 import com.gaogao.easylock_back.entity.Owner;
 import com.gaogao.easylock_back.mapper.FangyuanMapper;
@@ -36,6 +37,10 @@ public class FangyuanService {
             return false;
         }
         return true;
+    }
+    public Fangyuan selectByfid(Integer fid){
+        //用fid找到房源
+        return fangyuanMapper.selectOneByfid(fid);
     }
 
 }

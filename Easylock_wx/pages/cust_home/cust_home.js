@@ -3,7 +3,7 @@ const backurl = app.globalData.backurl;
 Page({
 
   data: {
-
+    keys:[]
   },
 
   // 每个tabbar页面要加

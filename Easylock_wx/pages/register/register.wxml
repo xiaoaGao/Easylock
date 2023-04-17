@@ -24,6 +24,6 @@
     </van-radio-group>
   </view>
   <view style="height: 150px;width: 200px;">
-    <van-button type="info" size="large" round bind:click="regist" model:disabled="{{ can }}">注册</van-button>
+    <van-button type="info" size="large" round click="regist" model:disabled="{{ can }}">注册</van-button>
   </view>
 </view>

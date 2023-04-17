@@ -10,6 +10,7 @@
   <van-grid column-num="3" >
   <van-grid-item  text="绑定门锁" icon="exchange" bindtap="tobind" wx:if="{{!isbind}}"/>
   <van-grid-item  text="钥匙分配" icon="vip-card-o" wx:if="{{isbind}}" bindtap="togivekey"/>
+  <van-grid-item  text="已发钥匙" icon="description" wx:if="{{isbind}}" bindtap="togiven"/>
   <van-grid-item  text="解除门锁绑定" icon="revoke" wx:if="{{isbind}}" bindtap="unbind" />
   <van-grid-item  text="开门记录" icon="todo-list-o" wx:if="{{isbind}}" bindtap="torecord"/>
   <van-grid-item  text="房客请求" icon="chat-o" wx:if="{{isbind}}" />

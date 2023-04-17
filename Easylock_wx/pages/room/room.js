@@ -33,9 +33,15 @@ Page({
       Toast('绑定成功！');
       that.data.type=0;
     }
+    else if(that.data.type==2){
+      //从绑定门锁中成功返回
+      Toast('分发钥匙成功！');
+      that.data.type=0;
+    }
     
   },
   torecord(){
+    //到开门记录
     var that = this;
     wx.navigateTo({
       //带参数跳转到其他页面
@@ -43,6 +49,7 @@ Page({
     })
   },
   tobind() {
+    //到绑定界面
     var that = this;
     wx.navigateTo({
       //带参数跳转到其他页面
@@ -150,10 +157,19 @@ Page({
     , 3000)
   },
   togivekey(){
+    var that=this
     //分配钥匙
     wx.navigateTo({
       //带参数跳转到其他页面
       url: '../givekey/givekey?rid=' + that.data.rid
+    })
+  },
+  togiven(){
+    var that=this
+    //查看已发钥匙
+    wx.navigateTo({
+      //带参数跳转到其他页面
+      url: '../given/given?rid=' + that.data.rid
     })
   },
   //刷新页面

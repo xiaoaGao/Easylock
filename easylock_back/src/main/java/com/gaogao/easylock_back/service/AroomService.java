@@ -45,5 +45,9 @@ public class AroomService {
         }
         return true;
     }
+    public Aroom selectByrid(Integer rid){
+        //用rid找到房间
+        return aroomMapper.getroombyid(rid);
+    }
 
 }

@@ -5,6 +5,7 @@ import com.gaogao.easylock_back.entity.Aroom;
 import com.gaogao.easylock_back.mapper.AroomMapper;
 import com.gaogao.easylock_back.service.AroomService;
 import com.gaogao.easylock_back.service.FangyuanService;
+import com.gaogao.easylock_back.service.OrdersService;
 import com.gaogao.easylock_back.service.UnlockrecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +24,8 @@ public class AroomController {
     @Autowired
     private UnlockrecordService unlockrecordService;
 
+    @Autowired
+    private OrdersService ordersService;
     @PostMapping("/addroom")
     public Result<?> addroom(@RequestBody Aroom aroom){
         //添加房间
@@ -61,6 +64,17 @@ public class AroomController {
     @GetMapping("/getAllroom/{oid}")
     public  Result<?> getAllroom(@PathVariable Integer oid){
         List<Aroom> a=aroomMapper.getAllroom(oid);
+        //更新房间在住状态
+        for(Aroom t:a){
+            if(ordersService.getroomstate(t.getRid())&&t.getState()==0){
+                t.setState(1);
+                aroomService.save(t);
+            }
+            else if(!ordersService.getroomstate(t.getRid())&&t.getState()==1){
+                t.setState(0);
+                aroomService.save(t);
+            }
+        }
         return Result.success(a,"查找成功！");
     }
     //查找单个房间的信息

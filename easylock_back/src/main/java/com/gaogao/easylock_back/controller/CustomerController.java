@@ -2,10 +2,14 @@ package com.gaogao.easylock_back.controller;
 
 import com.gaogao.easylock_back.common.Result;
 import com.gaogao.easylock_back.entity.Customer;
+import com.gaogao.easylock_back.entity.roomporder;
 import com.gaogao.easylock_back.mapper.CustomerMapper;
 import com.gaogao.easylock_back.service.CustomerService;
+import com.gaogao.easylock_back.service.OrdersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/customer")
@@ -14,6 +18,9 @@ public class CustomerController {
     private CustomerMapper customerMapper;
     @Autowired
     private CustomerService customerService;
+    @Autowired
+    private OrdersService ordersService;
+
     @PostMapping("/register")
     public Result<?> register(@RequestBody Customer customer){
         //注册
@@ -56,4 +63,16 @@ public class CustomerController {
     public Integer delete(@PathVariable Integer cid){
         return customerMapper.deleteById(cid);
     }
+
+    //获取我现在的房间
+    @GetMapping("/getmyroom/{phone}")
+    public Result<?> getmyroom(@PathVariable String  phone){
+        List<roomporder> res=ordersService.getmyroom(phone);
+        if(res!=null)
+            return Result.success(res,"查找钥匙成功！");
+        return Result.error("0","暂时没有钥匙！");
+    }
+
+
+
 }

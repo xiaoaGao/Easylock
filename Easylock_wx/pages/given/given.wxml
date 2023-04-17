@@ -1,9 +1,8 @@
 <van-tabs active="{{ active }}" color="#004299">
   <van-tab title="时间段钥匙">
-
     <scroll-view enhanced :show-scrollbar="false">
       <van-cell-group inset="true">
-        <view wx:for="{{keys}}" wx:for-index="index" wx:for-item="item">
+        <view wx:for="{{given1}}" wx:for-index="index" wx:for-item="item"> 
             <van-cell value="联系方式：{{item.phone}}" bindlongpress="todelete" data-ordid="{{item.ordid}}" data-who="{{item.realname}}">
               <view slot="title">
                 <view class="van-cell-text">持有人：{{item.realname}}</view>
@@ -14,7 +13,6 @@
       </van-cell-group>
 
     </scroll-view>
-      
   </van-tab>
 
   <van-tab title="密码次数钥匙">内容 2
@@ -24,3 +22,4 @@
 </van-tabs>
 
 <van-toast id="van-toast" />
+<van-dialog id="van-dialog" />
