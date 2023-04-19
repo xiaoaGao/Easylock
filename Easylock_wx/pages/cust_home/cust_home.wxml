@@ -1,13 +1,12 @@
 <van-tabs active="{{ active }}" color="#004299">
   <van-tab title="时间段钥匙">
-
     <scroll-view enhanced :show-scrollbar="false">
       <van-cell-group inset="true">
         <view wx:for="{{keys}}" wx:for-index="index" wx:for-item="item">
-            <van-cell value="联系方式：{{item.phone}}" bindlongpress="todelete" data-ordid="{{item.ordid}}" data-who="{{item.realname}}">
+            <van-cell value="{{item.ready==1?'钥匙已生效':'钥匙未生效'}}" bindtap="tocsroom" data-oid="{{item.aroom.oid}}" data-roomnum="{{item.aroom.roomnum}}" data-deviceid="{{item.aroom.deviceid}}" data-ordid="{{item.orders.ordid}}" data-rid="{{item.orders.rid}}" data-standard="{{item.aroom.standard}}" data-jieshao="{{item.aroom.jieshao}}" data-location="{{item.fangyuan.location}}" data-ready="{{item.ready}}">
               <view slot="title">
-                <view class="van-cell-text">持有人：{{item.realname}}</view>
-                <view span="24" style="color:#C0C0C0;font-size: 13px;">自 {{item.start}} 至 {{item.end}}</view>
+                <view class="van-cell-text">{{item.fangyuan.fname}}-{{item.aroom.roomnum}}</view>
+                <view span="24" style="color:#C0C0C0;font-size: 13px;">自 {{item.orders.start}} 至 {{item.orders.end}}</view>
               </view>
             </van-cell>
         </view>

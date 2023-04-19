@@ -1,14 +1,15 @@
 <van-tabs active="{{ active }}" color="#004299">
   <van-tab title="时间段钥匙">
+    <van-notice-bar color="#1989fa" background="#ecf9ff" left-icon="info-o" text="长按可取消钥匙分配" />
     <scroll-view enhanced :show-scrollbar="false">
       <van-cell-group inset="true">
-        <view wx:for="{{given1}}" wx:for-index="index" wx:for-item="item"> 
-            <van-cell value="联系方式：{{item.phone}}" bindlongpress="todelete" data-ordid="{{item.ordid}}" data-who="{{item.realname}}">
-              <view slot="title">
-                <view class="van-cell-text">持有人：{{item.realname}}</view>
-                <view span="24" style="color:#C0C0C0;font-size: 13px;">自 {{item.start}} 至 {{item.end}}</view>
-              </view>
-            </van-cell>
+        <view wx:for="{{given1}}" wx:for-index="index" wx:for-item="item">
+          <van-cell value="联系方式：{{item.phone}}" bindlongpress="todelete" data-ordid="{{item.ordid}}" data-who="{{item.realname}}">
+            <view slot="title">
+              <view class="van-cell-text">持有人：{{item.realname}}</view>
+              <view span="24" style="color:#C0C0C0;font-size: 13px;">自 {{item.start}} 至 {{item.end}}</view>
+            </view>
+          </van-cell>
         </view>
       </van-cell-group>
 

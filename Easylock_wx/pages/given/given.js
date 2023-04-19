@@ -7,6 +7,7 @@ const backurl = app.globalData.backurl;
 Page({
 
   data: {
+    rid:'',
     active: 0,
     given1:[]
   },
@@ -25,8 +26,7 @@ Page({
     var that=this
     that.setData({given1:[]})
     wx.request({
-      // url: backurl + '/orders/getgiven/'+that.data.rid,
-      url: backurl + '/orders/getgiven/'+1,
+      url: backurl + '/orders/getgiven/'+that.data.rid,
       method: 'GET',
       success(res) {
         console.log(res.data.data)

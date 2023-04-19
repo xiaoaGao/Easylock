@@ -5,6 +5,7 @@
     "van-stepper": "@vant/weapp/stepper/index",
     "van-cell": "@vant/weapp/cell/index",
     "van-cell-group": "@vant/weapp/cell-group/index",
-    "van-calendar": "@vant/weapp/calendar/index"
+    "van-calendar": "@vant/weapp/calendar/index",
+    "van-notice-bar": "@vant/weapp/notice-bar/index"
   }
 }

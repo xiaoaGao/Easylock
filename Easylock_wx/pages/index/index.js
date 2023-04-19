@@ -10,7 +10,6 @@ Page({
     username: '',
     passwd: '',
     status: 0,
-
   },
 
   onLoad(options) {
@@ -46,7 +45,7 @@ Page({
             if (res.data.code == 1) {
               wx.setStorageSync('status', 1);
               wx.setStorageSync('me', res.data.data);
-              wx.redirectTo({
+              wx.switchTab({
                 url: '../cust_home/cust_home',
               })
             } else {

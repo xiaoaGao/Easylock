@@ -49,5 +49,12 @@ public class AroomService {
         //用rid找到房间
         return aroomMapper.getroombyid(rid);
     }
+    //判断房间是否还在，防止已经被删除
+    public Boolean isExist(Integer rid){
+        if(aroomMapper.getroombyid(rid)==null){
+            return false;
+        }
+        return true;
+    }
 
 }

@@ -67,6 +67,7 @@ public class AroomController {
         //更新房间在住状态
         for(Aroom t:a){
             if(ordersService.getroomstate(t.getRid())&&t.getState()==0){
+                //更新数据库
                 t.setState(1);
                 aroomService.save(t);
             }

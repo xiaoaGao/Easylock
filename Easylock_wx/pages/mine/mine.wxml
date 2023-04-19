@@ -9,7 +9,7 @@
       </view>
       <view style="margin-top: 30px;font-size: 15px;color: #999999;">
         <view>用户名:{{username}}</view>
-        <view>手机号：{{phone}}</view>
+        <view>手机号:{{phone}}</view>
       </view>
     </view>
   </view>

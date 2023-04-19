@@ -63,6 +63,7 @@ public class Result<T> {
         Result result=new Result<>();
         result.setCode("0");
         result.setMsg(msg);
+        result.setData(data);
         return result;
     }
 }

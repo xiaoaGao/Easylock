@@ -6,7 +6,7 @@
     <van-field model:value="{{ roomnum }}"required  clearable label="房间号" placeholder="请输入房间号"   />
     <van-field model:value="{{ standard }}"required  readonly label="房间规格" placeholder="点击选择房间规格"  bindtap="toshow"bind:change="onComp"/>
     <van-field
-    value="{{ jieshao }}"
+    model:value="{{ jieshao }}"
     label="房间介绍"
     type="textarea"
     placeholder="请输入房间介绍（200字以内）"

@@ -10,13 +10,10 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Unlockrecord {
-    private Integer id;
-    private Integer rid;
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date time;
-    private Integer type;
-    private String realname;
-    private String phone;
+public class Demand {
+    private Integer did;
+    private Integer dtype;
+    private Integer ordid;
+    private String  note;//备注
 
 }

@@ -44,7 +44,6 @@ public interface AroomMapper {
     @Update("update aroom set deviceid = null where rid=#{rid} ;")
     Integer unbind(@Param("rid") Integer rid);
 
-
     @Select("SELECT state FROM aroom where rid=#{rid}")
     Aroom isliving(@Param("rid") Integer rid);
 }

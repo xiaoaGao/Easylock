@@ -1,6 +1,5 @@
 {
   "pages": [
-    
     "pages/index/index",
     "pages/mine/mine",
     "custom-tab-bar/index",
@@ -14,8 +13,8 @@
     "pages/given/given",
     "pages/givekey/givekey",
     "pages/editroom/editroom",
-    "pages/record/record"
-    
+    "pages/record/record",
+    "pages/csroom/csroom"
   ],
   "window": {
     "backgroundTextStyle": "light",
