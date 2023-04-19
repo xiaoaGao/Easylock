@@ -13,7 +13,7 @@
   <van-grid-item  text="已发钥匙" icon="description" wx:if="{{isbind}}" bindtap="togiven"/>
   <van-grid-item  text="解除门锁绑定" icon="revoke" wx:if="{{isbind}}" bindtap="unbind" />
   <van-grid-item  text="开门记录" icon="todo-list-o" wx:if="{{isbind}}" bindtap="torecord"/>
-  <van-grid-item  text="房客请求" icon="chat-o" wx:if="{{isbind}}" />
+  <van-grid-item  badge="{{totaldemands}}" text="房客请求" icon="chat-o" wx:if="{{isbind}}" bindtap="todemands"/>
   <van-grid-item  text="删除此房间" icon="delete-o" bindtap="deleteroom"/>
   <van-grid-item  text="修改房间信息" icon="font-o" bindtap="toeditroom"/>
   

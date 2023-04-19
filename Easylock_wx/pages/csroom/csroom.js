@@ -18,7 +18,13 @@ Page({
     deviceId: '',
     randomcode: '',
     dd: '',
-    ready:''
+    ready: '',
+    end: '',
+    xuzhu: false,
+    fuwu: false,
+    dtype: 0,
+    prolongday: 1,
+    longto: ''
   },
 
   onLoad: function (options) {
@@ -33,22 +39,61 @@ Page({
       jieshao: options.jieshao,
       location: options.location,
       rid: options.rid,
-      ready:options.ready
+      ready: options.ready,
+      end: options.end
     })
-    console.log(that.data.ready)
+    console.log(that.data.end)
+
   },
   onShow: function (options) {
     var that = this
   },
-
+  stepchange(e) {
+    //步进器改变
+    var that=this
+    var date=new Date(that.data.end)
+    date=date.setDate(date.getDate()+e.detail);//加e天
+    // console.log(date)
+    var d=that.formatDateTime(date)
+    this.setData({
+      prolongday: e.detail,
+      longto:d
+    })
+    console.log(that.data.prolongday)
+  },
   unlock() {
     console.log('unlock')
     var that = this
     that.bleInit()
   },
-  prolonglive(){
+  showxuzhu() {
+    this.setData({
+      xuzhu: true
+    })
+  },
+  confirmprolong() {
     //请求续住
-    
+    var that=this
+    wx.request({
+      url: backurl + '/demand/prolongdemand',
+      method: 'POST',
+      data: {
+        dtype: 1,
+        note:that.data.prolongday,
+        ordid: that.data.ordid
+      },
+      success(res) {
+        console.log(res);
+        Toast(res.data.msg)
+      }
+    })
+  },
+  tomydemand(){
+    var that=this
+    wx.navigateTo({
+      //带参数跳转到其他页面
+      url: '../mydemand/mydemand?ordid='+that.data.ordid
+    })
   },
   onUnload() {
     //断开蓝牙连接
@@ -58,6 +103,44 @@ Page({
     wx.closeBluetoothAdapter()
   },
 
+  showfuwu() {
+    this.setData({
+      fuwu: true
+    })
+  },
+  confirmfuwu() {
+    var that = this
+    wx.request({
+      url: backurl + '/demand/otherdemand',
+      method: 'POST',
+      data: {
+        dtype: that.data.dtype,
+        ordid: that.data.ordid
+      },
+      success(res) {
+        console.log(res);
+        Toast(res.data.msg)
+      }
+    })
+  },
+  formatDateTime(d) {
+    var date = new Date(d)
+    var year = date.getFullYear()
+    var month = date.getMonth() + 1
+    var day = date.getDate()
+
+    var hour = date.getHours()
+    var minu = date.getMinutes()
+    var sec = date.getSeconds()
+
+    month = month >= 10 ? month : '0' + month
+    day = day >= 10 ? day : '0' + day
+    hour = hour >= 10 ? hour : '0' + hour
+    minu = minu >= 10 ? minu : '0' + minu
+    sec = sec >= 10 ? sec : '0' + sec
+
+    return `${year}-${month}-${day} ${hour}:${minu}:${sec}`
+  },
   //蓝牙BLE模块
   bleInit() {
     console.log('searchBle')

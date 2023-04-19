@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gaogao.easylock_back.mapper.DemandMapper">
+    <update id="update">
+        update demand
+        <set>
+            <if test="dtype!=null">
+                dtype=#{dtype},
+            </if>
+            <if test="note!=null">
+                note=#{note},
+            </if>
+            <if test="ordid!=null">
+                ordid=#{ordid},
+            </if>
+            <if test="done!=null">
+                done=#{done}
+            </if>
+        </set>
+        <where>
+            did=#{did}
+        </where>
+    </update>
+</mapper>

@@ -10,6 +10,7 @@ Page({
   onLoad() {
     var that = this
     that.flash()
+    console.log(that.data.keys)
   },
   flash() {
     //刷新页面
@@ -36,7 +37,7 @@ Page({
   tocsroom(e) {
       wx.navigateTo({
         //带参数跳转到其他页面
-        url: '../csroom/csroom?oid='+e.currentTarget.dataset.oid+"&roomnum="+e.currentTarget.dataset.roomnum+"&deviceid="+e.currentTarget.dataset.deviceid+"&ordid="+e.currentTarget.dataset.ordid+"&standard="+e.currentTarget.dataset.standard+"&jieshao="+e.currentTarget.dataset.jieshao+"&location="+e.currentTarget.dataset.location+"&rid="+e.currentTarget.dataset.rid+"&ready="+e.currentTarget.dataset.ready
+        url: '../csroom/csroom?oid='+e.currentTarget.dataset.oid+"&roomnum="+e.currentTarget.dataset.roomnum+"&deviceid="+e.currentTarget.dataset.deviceid+"&ordid="+e.currentTarget.dataset.ordid+"&standard="+e.currentTarget.dataset.standard+"&jieshao="+e.currentTarget.dataset.jieshao+"&location="+e.currentTarget.dataset.location+"&rid="+e.currentTarget.dataset.rid+"&ready="+e.currentTarget.dataset.ready+"&end="+e.currentTarget.dataset.end
       })
   },
   // 每个tabbar页面要加

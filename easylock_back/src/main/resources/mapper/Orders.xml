@@ -5,24 +5,27 @@
     <update id="update">
         update orders
         <set>
-            <if test="deviceid!=null">
-                deviceid=#{deviceid},
+            <if test="rid!=null">
+                rid=#{rid},
             </if>
-            <if test="roomnum!=null">
-                roomnum=#{roomnum},
+            <if test="realname!=null">
+                realname=#{realname},
             </if>
-            <if test="state!=null">
-                state=#{state},
+            <if test="phone!=null">
+                phone=#{phone},
             </if>
-            <if test="standard!=null">
-                standard=#{standard},
+            <if test="idnum!=null">
+                idnum=#{idnum},
             </if>
-            <if test="jieshao!=null">
-                jieshao=#{jieshao}
+            <if test="start!=null">
+                start=#{start},
+            </if>
+            <if test="end!=null">
+                end=#{end}
             </if>
         </set>
         <where>
-            rid=#{rid}
+            ordid=#{ordid}
         </where>
     </update>
 </mapper>

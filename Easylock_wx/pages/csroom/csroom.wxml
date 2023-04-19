@@ -1,20 +1,63 @@
 <view class="form">
 
-<view style="text-align: center;color: #000000;font-size: 22px;font-weight: bold;height: 5px;">
-<view >房间号：{{roomnum}}</view>
-<view style="font-size: 17px;" >地址：{{location}}</view>
-<van-tag type="success" size="large">{{standard}}</van-tag>
-</view>
-<van-button type="primary" disabled="{{ready==1?false:true}}"round icon="lock" bind:click="unlock">{{ready==1?'立即开门':'钥匙未生效'}}</van-button>
-<view style="font-size: 13px;" >房东寄语:{{jieshao}}</view>
-<view style="width: 100%;height: 200px;">
-  <van-grid column-num="3" >
-  <van-grid-item  text="请求续住" icon="clock-o" bindtap="prolonglive" />
-  <van-grid-item  text="请求服务" icon="smile-o"  />
-  
-</van-grid>
-</view>
+  <view style="text-align: center;color: #000000;font-size: 22px;font-weight: bold;height: 50px;">
+    <view>房间号：{{roomnum}}</view>
+    <view style="font-size: 17px;">地址：{{location}}</view>
+    <van-tag type="success" size="large">{{standard}}</van-tag>
+  </view>
+  <van-button type="primary" disabled="{{ready==1?false:true}}" round icon="lock" bind:click="unlock">{{ready==1?'立即开门':'钥匙未生效'}}</van-button>
+  <view style="font-size: 13px;">房东寄语:{{jieshao}}</view>
+  <view style="width: 100%;height: 200px;">
+    <van-grid column-num="3">
+      <van-grid-item text="请求续住" icon="clock-o" bindtap="showxuzhu" />
+      <van-grid-item text="请求房间服务" icon="smile-o" bindtap="showfuwu"  />
+      <van-grid-item text="查看我的请求" icon="orders-o" bindtap="tomydemand"  />
+    </van-grid>
+  </view>
 
 </view>
 <van-toast id="van-toast" />
-<van-dialog id="van-dialog" />
+<van-dialog use-slot show="{{ xuzhu }}" title="请求续住" show-cancel-button bind:confirm="confirmprolong">
+  <van-row>
+    <van-col offset="4" span="7">续住天数:</van-col>
+    <van-col span="8" offset="4">
+      <van-stepper disable-input value="{{ prolongday }}" bind:change="stepchange" max="7" long-press="false" />
+    </van-col>
+  </van-row>
+  <van-row>
+    <van-col offset="4" span="18">续住至:{{longto}}</van-col>
+  </van-row>
+</van-dialog>
+<van-dialog use-slot show="{{ fuwu }}" title="请求服务" show-cancel-button bind:confirm="confirmfuwu">
+  <van-radio-group model:value="{{ dtype }}" >
+    <view style="height: 30px;">
+      <van-row>
+        <van-col span="8" offset="5">
+          <van-radio name="2" label-disabled>更换床单</van-radio>
+        </van-col>
+      </van-row>
+    </view>
+    <view style="height: 30px;">
+      <van-row>
+        <van-col span="8" offset="5">
+          <van-radio name="3" label-disabled>更换毛巾</van-radio>
+        </van-col>
+      </van-row>
+    </view>
+    <view style="height: 30px;">
+      <van-row>
+        <van-col span="8" offset="5">
+          <van-radio name="4" label-disabled>打扫房间</van-radio>
+        </van-col>
+      </van-row>
+    </view>
+    <view style="height: 30px;">
+      <van-row>
+        <van-col span="8" offset="5">
+          <van-radio name="5" label-disabled>维修电器</van-radio>
+        </van-col>
+      </van-row>
+    </view>
+
+  </van-radio-group>
+</van-dialog>

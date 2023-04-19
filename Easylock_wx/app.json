@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/given/given",
     "pages/index/index",
     "pages/mine/mine",
     "custom-tab-bar/index",
@@ -10,11 +11,15 @@
     "pages/addfang/addfang",
     "pages/addroom/addroom",
     "pages/room/room",
-    "pages/given/given",
+    
     "pages/givekey/givekey",
     "pages/editroom/editroom",
     "pages/record/record",
-    "pages/csroom/csroom"
+    "pages/csroom/csroom",
+    "pages/cust_demand/cust_demand",
+    "pages/mydemand/mydemand",
+    "pages/roomdemand/roomdemand",
+    "pages/roomdemands/roomdemands"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -17,7 +17,8 @@ Page({
     standard: '',
     jieshao: '',
     randomcode: '',
-    dd: ''
+    dd: '',
+    totaldemands: 0,
   },
 
   onLoad: function (options) {
@@ -144,7 +145,25 @@ Page({
     //关闭蓝牙适配器
     wx.closeBluetoothAdapter()
   },
+  getdemand() {
+    //获取这个房间的请求
+    var that = this
+    wx.request({
+      url: backurl + '/demand/getroomdemand/' + that.data.rid,
+      method: 'GET',
+      success(res) {
+        if (res.data.code == 1) {
+          wx.setStorageSync(that.data.rid, res.data.data)
+          that.setData({
+            totaldemands: res.data.data.length
+          })
+          console.log(wx.getStorageSync(that.data.rid))
 
+        }
+
+      }
+    })
+  },
   //刷新页面
   flash() {
     var that = this
@@ -172,10 +191,18 @@ Page({
           })
         }
         console.log(that.data.isbind)
+        that.getdemand()
       }
     })
   },
-
+  todemands() {
+    var that =this
+    //到房客请求界面
+    wx.navigateTo({
+      //带参数跳转到其他页面
+      url: '../roomdemands/roomdemands?rid='+that.data.rid
+    })
+  },
   //蓝牙BLE模块
   bleInit() {
     console.log('searchBle')
@@ -220,7 +247,7 @@ Page({
     })
     wx.onBLECharacteristicValueChange((result) => {
       //特征值变化
-      
+
       console.log('收到了：', result.value)
       let hex = that.ab2hex(result.value)
       console.log('转成字符：', that.hextoString(hex))

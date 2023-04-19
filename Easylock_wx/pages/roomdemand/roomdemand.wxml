@@ -1,0 +1,8 @@
+<view style="height: 40px;margin: 20px;font-size:20px;color: #333333;">我的请求</view>
+<van-cell-group inset>
+<view wx:for="{{demands}}" wx:for-index="index" wx:for-item="item">
+
+  <van-cell title="{{type[item.dtype-2]}}" value="请求状态：{{done[item.done]}}" size="large" label="点击绑定该锁" icon="smile-o" wx:if="{{item.dtype!=1}}"/>
+  <van-cell title="请求续住" value="请求状态：{{done[item.done]}}" size="large" label="续住{{item.note}}天" icon="clock-o" wx:else/>
+</view>
+</van-cell-group>

@@ -3,7 +3,7 @@
     <scroll-view enhanced :show-scrollbar="false">
       <van-cell-group inset="true">
         <view wx:for="{{keys}}" wx:for-index="index" wx:for-item="item">
-            <van-cell value="{{item.ready==1?'钥匙已生效':'钥匙未生效'}}" bindtap="tocsroom" data-oid="{{item.aroom.oid}}" data-roomnum="{{item.aroom.roomnum}}" data-deviceid="{{item.aroom.deviceid}}" data-ordid="{{item.orders.ordid}}" data-rid="{{item.orders.rid}}" data-standard="{{item.aroom.standard}}" data-jieshao="{{item.aroom.jieshao}}" data-location="{{item.fangyuan.location}}" data-ready="{{item.ready}}">
+            <van-cell value="{{item.ready==1?'钥匙已生效':'钥匙未生效'}}" bindtap="tocsroom" data-oid="{{item.aroom.oid}}" data-roomnum="{{item.aroom.roomnum}}" data-deviceid="{{item.aroom.deviceid}}" data-ordid="{{item.orders.ordid}}" data-rid="{{item.orders.rid}}" data-standard="{{item.aroom.standard}}" data-jieshao="{{item.aroom.jieshao}}" data-location="{{item.fangyuan.location}}" data-ready="{{item.ready}}" data-end="{{item.orders.end}}">
               <view slot="title">
                 <view class="van-cell-text">{{item.fangyuan.fname}}-{{item.aroom.roomnum}}</view>
                 <view span="24" style="color:#C0C0C0;font-size: 13px;">自 {{item.orders.start}} 至 {{item.orders.end}}</view>

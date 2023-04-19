@@ -23,14 +23,14 @@ public class OrdersService {
     @Autowired
     private FangyuanService fangyuanService;
 //    //插入或修改
-//    public int save(Orders orders){
-//        if(orders.getRid()==null){
-//            return OrdersMapper.insert(orders);
-//        }
-//        else{
-//            return OrdersMapper.update(orders);
-//        }
-//    }
+    public Integer save(Orders orders){
+        if(orders.getOrdid()==null){
+            return ordersMapper.insert(orders);
+        }
+        else{
+            return ordersMapper.update(orders);
+        }
+    }
     //判断传入的时间是否合法，若与已存在的房间时间冲突则非法
     public boolean islegal(givenorder given){
         //找到所有rid房间正在进行的订单
@@ -44,6 +44,12 @@ public class OrdersService {
         return true;
     }
 
+    //通过ordid获取order
+    public Orders getorderByid(Integer ordid){
+        //找到所有rid房间正在进行的订单
+        Orders os=ordersMapper.getorderByid(ordid);
+        return os;
+    }
     public boolean daycontain(Date d,Date d1,Date d2){
         //判断d是否在d1,d2时间段内
         if(d.getTime()>=d1.getTime()&&d.getTime()<=d2.getTime())

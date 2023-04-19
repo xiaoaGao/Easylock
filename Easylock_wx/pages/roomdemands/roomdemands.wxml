@@ -1,0 +1,38 @@
+<view style="height: 40px;margin: 20px;font-size:20px;color: #333333;">房客请求</view>
+
+  <view wx:for="{{demands}}" wx:for-index="index" wx:for-item="item">
+    <view wx:if="{{item.done==0}}">
+      <view style="height:50px;font-size:16px;color: #333333;" wx:if="{{item.dtype!=1}}">
+      <van-row gutter="20">
+        <van-col span="8">
+          <van-icon name="smile-o" />{{type[item.dtype-2]}}
+        </van-col>
+        <van-col span="4" offset="6">
+          <van-button icon="success" type="info" round size="mini" data-did="{{item.did}}" bindtap="dodemand"/>
+        </van-col>
+
+      </van-row>
+      <van-row gutter="20" style="font-size:14px;color: #777474;">
+        <van-col span="8" offset="1">请求人：{{item.realname}}</van-col>
+      </van-row>
+    </view>
+
+    <view style="height:50px;font-size:16px;color: #333333;" wx:else>
+      <van-row gutter="20">
+        <van-col span="8">
+          <van-icon name="clock-o" />申请续住{{item.note}}天
+        </van-col>
+        <van-col span="4" offset="6">
+          <van-button icon="success" type="info" round size="mini" data-did="{{item.did}}" bindtap="permissionprolong"/>
+        </van-col>
+        <van-col span="4">
+          <van-button icon="cross" type="danger" round size="mini" data-did="{{item.did}}" bindtap="rejectprolong"/>
+        </van-col>
+      </van-row>
+      <van-row gutter="20" style="font-size:14px;color: #777474;">
+        <van-col span="8" offset="1">请求人：{{item.realname}}</van-col>
+      </van-row>
+    </view>
+    </view>
+    
+  </view><van-toast id="van-toast" />
