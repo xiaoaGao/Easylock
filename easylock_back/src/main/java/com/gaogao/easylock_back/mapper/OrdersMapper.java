@@ -25,5 +25,8 @@ public interface OrdersMapper {
     //用手机号查找还未结束的订单
     @Select("SELECT * FROM orders WHERE end>=NOW() and phone =#{phone}")
     List<Orders> findallunfinishByphone(@Param("phone") String phone);
+    //用手机号、身份证查找还未结束的订单
+    @Select("SELECT * FROM orders WHERE end>=NOW() and phone =#{phone} and idnum =#{idnum}")
+    List<Orders> findallunfinishByphoneAndidnum(@Param("phone") String phone,@Param("idnum") String idnum);
 
 }

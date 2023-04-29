@@ -57,7 +57,25 @@ public class CustomerController {
             return 0;
         return customerService.save(customer);
     }
+    @PostMapping("/changepwd")
+    public Result<?> changepwd(@RequestParam Integer  cid,@RequestParam String  oldpwd,@RequestParam String  newpwd) {
+        //修改信息，cid字段需要有值
 
+        Customer res= customerMapper.selectByIdAndPwd(cid,oldpwd);
+        if(res==null){
+            return Result.error("0","原密码错误！");
+        }
+        else{
+            Customer customer=new Customer();
+            customer.setCid(cid);
+            customer.setPasswd(newpwd);
+            if(customerService.save(customer)==0){
+                return Result.error("0","修改失败！");
+            }
+            else
+                return Result.success("1","修改成功！");
+        }
+    }
     //删除用户，路径里的cid就是参数的cid
     @DeleteMapping("/delete/{cid}")
     public Integer delete(@PathVariable Integer cid) {
@@ -73,6 +91,16 @@ public class CustomerController {
         return Result.error("0","暂时没有钥匙！");
     }
 
+    //获取我现在的房间,完善版本，验证手机和身份证
+//    @GetMapping("/getmyroom")
+//    public Result<?> getmyroom(@RequestBody Customer  customer){
+//        String phone=customer.getPhone();
+//        String idnum=customer.getIdnum();
+//        List<roomporder> res=ordersService.getmyroom(phone,idnum);
+//        if(res!=null)
+//            return Result.success(res,"查找钥匙成功！");
+//        return Result.error("0","暂时没有钥匙！");
+//    }
 //    @GetMapping("/getmyroom")
 //    public Result<?> getmyroom(@RequestBody Customer customer) {
 //        List<roomporder> res = ordersService.getmyroom2(customer.getPhone(),customer.getRealname(),customer.getIdnum());

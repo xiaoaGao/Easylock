@@ -6,7 +6,8 @@ Page({
 
   data: {
     rid:'',
-    records:[]
+    records:[],
+    whoop:['你','时间分配钥匙','密码钥匙']
   },
 
   

@@ -1,3 +1,4 @@
+
 <van-tabs active="{{ active }}" color="#004299">
   <van-tab title="时间段钥匙">
     <van-notice-bar color="#1989fa" background="#ecf9ff" left-icon="info-o" text="务必保证信息正确，否则客人无法收到钥匙" />
@@ -22,26 +23,29 @@
   </van-tab>
 
   <van-tab title="密码次数钥匙">
+    <van-notice-bar color="#1989fa" background="#ecf9ff" left-icon="info-o" text="房间未分配时间段钥匙时才能分配此钥匙！" />
     <van-cell-group>
       <van-cell>
         <view slot="title">
           <view class="van-cell-text">选择钥匙有效次数:</view>
         </view>
         <view class="van-cell-text">
-          <van-stepper disable-input value="{{ totalcust }}" bind:change="stepchange" max="3" long-press="false" />
+          <van-stepper disable-input value="{{ validtimes }}" bind:change="stepchange" max="3" long-press="false" />
         </view>
       </van-cell>
-      <view wx:for="{{customers}}" wx:for-index="index" wx:for-item="item">
-        <van-field model:value="{{ item.phone }}" label="房客{{index+1}}手机号" placeholder="请输入房客手机号码" bind:change="onComp" data-which="{{index}}0" />
-        <van-field model:value="{{ item.realname }}" clearable label="房客{{index+1}}真名" placeholder="请输入真实姓名" bind:change="onComp" data-which="{{index}}1" />
-        <van-field model:value="{{ item.idnum }}" label="房客{{index+1}}身份证" placeholder="请输入身份证号码" bind:change="onComp" data-which="{{index}}2" />
-      </view>
-      <van-cell title="选择密码有效日期" value="{{ day }}" bind:click="DisplayCalendar" />
-      <van-calendar color="#004299" show="{{ calendarshow }}" type="range" bind:close="onClose" bind:confirm="onConfirm" />
+      <!-- <van-cell title="选择密码有效日期" value="{{ day }}" bind:click="DisplayCalendar" /> -->
+      <van-cell title="选择密码开始生效时间：" value="{{ starttimeformat }}" bind:click="Displaystartpick" />
+      <van-cell title="选择密码结束生效时间："  value="{{ endtimeformat }}" bind:click="Displayendpick" />
+      
+
+      <!-- <van-calendar color="#004299" show="{{ calendarshow }}" type="range" bind:close="onClose" bind:confirm="onConfirm" /> -->
     </van-cell-group>
-    <van-button color="#004299" size="large" round bindtap="">发布</van-button>
+    <van-button color="#004299" size="large" round bindtap="newrandomkey">生成随机密码</van-button>
+    <van-datetime-picker item-height="20" type="datetime" wx:if="{{ startpicshow }}" value="{{ starttime }}" min-date="{{ minDate }}" bind:input="onstart" bind:confirm="confirmstart"/>
+    <van-datetime-picker item-height="20" type="datetime" wx:if="{{ endpicshow }}" value="{{ endtime }}" min-date="{{ minDate }}" bind:input="onend" bind:confirm="confirmend"/>
   </van-tab>
 
 </van-tabs>
 
 <van-toast id="van-toast" />
+<van-dialog id="van-dialog" />

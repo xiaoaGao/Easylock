@@ -4,7 +4,7 @@
 <view>房间号：{{roomnum}}</view>
 <van-tag type="success" size="large">{{standard}}</van-tag>
 </view>
-<van-button type="primary" round icon="lock" bindtap="unlock">立刻开门</van-button>
+<van-button type="primary" round icon="lock" bindtap="unlock" wx:if="{{isbind}}">立刻开门</van-button>
 
 <view style="width: 100%;">
   <van-grid column-num="3" >

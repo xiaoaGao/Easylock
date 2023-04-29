@@ -21,6 +21,7 @@ public interface CustomerMapper {
     @Delete("delete from customer where cid=#{cid}")
     Integer deleteById(@Param("cid") Integer cid);
 
+
     @Select("SELECT * FROM customer where phone=#{phone}")
     Customer selectOneByphone(@Param("phone") String phone);
 
@@ -30,4 +31,6 @@ public interface CustomerMapper {
     @Select("SELECT * FROM customer where username=#{username} and passwd=#{passwd}")
     Customer selectOnetoLogin(@Param("username") String username, @Param("passwd") String passwd);
 
+    @Select("SELECT * FROM customer where cid=#{cid} and passwd=#{passwd}")
+    Customer selectByIdAndPwd(@Param("cid") Integer cid, @Param("passwd") String passwd);
 }

@@ -1,5 +1,5 @@
 import Toast from '@vant/weapp/toast/toast';
-
+import Dialog from '@vant/weapp/dialog/dialog';
 const app = getApp();
 const backurl = app.globalData.backurl;
 
@@ -17,13 +17,108 @@ Page({
     calendarshow: false,
     day:'',//string
     start:'',//date
-    end:''
+    end:'',
+    validtimes:1,
+
+    minDate: new Date().getTime(),
+
+    currentDate: new Date().getTime(),
+    startpicshow:false,
+    endpicshow:false,
+    starttime:'',
+    endtime:'',
+    starttimeformat:'',
+    endtimeformat:'',
   },
 
   onLoad(options) {
     var that = this;
     that.setData({
       rid: options.rid
+    })
+    
+  },
+  //时间选择器
+  onstart(event) {
+    //精准时间选择器，时分秒
+    this.setData({
+      starttime: event.detail,
+    });
+  },
+  onend(event) {
+    //精准时间选择器，时分秒
+    this.setData({
+      endtime: event.detail,
+    });
+  },
+  confirmstart(){
+    var that= this
+    that.setData({
+      startpicshow:false,
+      endpicshow:false,
+      starttimeformat:that.formatDateTime(that.data.starttime)
+    })
+    console.log(that.data.starttime)
+  },
+  confirmend(){
+    var that= this
+    that.setData({
+      startpicshow:false,
+      endpicshow:false,
+      endtimeformat:that.formatDateTime(that.data.endtime)
+    })
+    console.log(that.data.endtime)
+  },
+  Displaystartpick(){
+    var that=this
+    that.setData({
+      startpicshow:true,
+      endpicshow:false
+    })
+  },
+  Displayendpick(){
+    var that=this
+    that.setData({
+      startpicshow:false,
+      endpicshow:true
+    })
+  },
+  //
+  newrandomkey(){
+    //生成随机密码
+    var that = this
+    if(that.data.starttimeformat==''||that.data.endtimeformat=='')
+    {
+      Toast('请选择时间！')
+      return
+    }
+    if(that.data.starttime>that.data.endtime)
+    {
+      Toast('开始时间不能晚于结束时间')
+      return
+    }
+    wx.request({
+      url: backurl + '/pwdkey/newpwdkey',
+      method: 'POST',
+      data:{
+        rid:that.data.rid,
+        starttime:that.data.starttimeformat,
+        endtime:that.data.endtimeformat,
+        times:that.data.validtimes
+      },
+      success(res) {
+        if (res.data.code == 1) {
+          Dialog.alert({
+            message: '随机密码为：'+res.data.msg,
+            theme: 'round-button',
+          }).then(() => {
+            wx.navigateBack()
+          });
+        }else{
+          Toast(res.data.msg)
+        }
+
+      }
     })
   },
   //日期选择器

@@ -9,12 +9,10 @@ Page({
   data: {
     rid:'',
     active: 0,
-    given1:[]
+    given1:[],
+    given2:[]
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad(options) {
     var that = this;
     that.setData({
@@ -29,7 +27,7 @@ Page({
       url: backurl + '/orders/getgiven/'+that.data.rid,
       method: 'GET',
       success(res) {
-        console.log(res.data.data)
+        // console.log(res.data.data)
         if (res.data.code == 1) {
           var rs=[]
           for (var i = 0; i < res.data.data.length; i++) {
@@ -40,7 +38,55 @@ Page({
             given1:rs
           })
         }
+        //这时候获取密码钥匙
+        that.getpwdkey()
     }})
+  },
+  getpwdkey(){
+    var that=this
+    that.setData({given2:[]})
+    wx.request({
+      url: backurl + '/pwdkey/getroomkey/'+that.data.rid,
+      method: 'GET',
+      success(res) {
+        console.log(res.data)
+        if (res.data.code == 1) {
+          var rs=[]
+          for (var i = 0; i < res.data.data.length; i++) {
+            // console.log(res.data.data[i])
+            rs.push(res.data.data[i])
+          }
+          that.setData({
+            given2:rs
+          })
+        }
+        console.log(that.data.given2)
+    }})
+  },
+  delepwdkey(e){
+    var that=this
+    console.log(e)
+    Dialog.confirm({
+      title: '提示',
+      message: '是否确定取消该密码钥匙？'
+    })
+      .then(() => {
+        wx.request({
+          url: backurl + '/pwdkey/deletebypid/'+e.currentTarget.dataset.pid,
+          method: 'DELETE',
+          success(res) {
+            if (res.data.code == 1) {
+              Toast(res.data.msg)
+              that.flash()
+            }
+            else{
+              Toast(res.data.msg)
+            }
+        }})
+      })
+      .catch(() => {
+        
+      });
   },
   todelete(e){
     var that=this

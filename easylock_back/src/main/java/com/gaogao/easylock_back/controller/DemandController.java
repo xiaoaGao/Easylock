@@ -126,7 +126,7 @@ public class DemandController {
             return Result.success("1", "确认成功！");
         }
     }
-    @PostMapping("/rejectprolong")
+    @PostMapping("/rejectprolong")  
     public Result<?> rejectprolong(@RequestBody Demand demand) {
         //房东拒绝续住的请求
         if(demand.getDtype()!=1)

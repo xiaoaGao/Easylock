@@ -1,5 +1,0 @@
-<van-button type="default">按钮</van-button>
-<van-icon name="close" />
-<view>
-  <van-icon name="chat" info="9" color="red" size="50px"/>
-</view>

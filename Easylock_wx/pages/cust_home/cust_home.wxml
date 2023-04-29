@@ -3,21 +3,31 @@
     <scroll-view enhanced :show-scrollbar="false">
       <van-cell-group inset="true">
         <view wx:for="{{keys}}" wx:for-index="index" wx:for-item="item">
-            <van-cell value="{{item.ready==1?'钥匙已生效':'钥匙未生效'}}" bindtap="tocsroom" data-oid="{{item.aroom.oid}}" data-roomnum="{{item.aroom.roomnum}}" data-deviceid="{{item.aroom.deviceid}}" data-ordid="{{item.orders.ordid}}" data-rid="{{item.orders.rid}}" data-standard="{{item.aroom.standard}}" data-jieshao="{{item.aroom.jieshao}}" data-location="{{item.fangyuan.location}}" data-ready="{{item.ready}}" data-end="{{item.orders.end}}">
-              <view slot="title">
-                <view class="van-cell-text">{{item.fangyuan.fname}}-{{item.aroom.roomnum}}</view>
-                <view span="24" style="color:#C0C0C0;font-size: 13px;">自 {{item.orders.start}} 至 {{item.orders.end}}</view>
-              </view>
-            </van-cell>
+          <van-cell value="{{item.ready==1?'钥匙已生效':'钥匙未生效'}}" bindtap="tocsroom" data-oid="{{item.aroom.oid}}" data-roomnum="{{item.aroom.roomnum}}" data-deviceid="{{item.aroom.deviceid}}" data-ordid="{{item.orders.ordid}}" data-rid="{{item.orders.rid}}" data-standard="{{item.aroom.standard}}" data-jieshao="{{item.aroom.jieshao}}" data-location="{{item.fangyuan.location}}" data-ready="{{item.ready}}" data-end="{{item.orders.end}}">
+            <view slot="title">
+              <view class="van-cell-text">{{item.fangyuan.fname}}-{{item.aroom.roomnum}}</view>
+              <view span="24" style="color:#C0C0C0;font-size: 13px;">自 {{item.orders.start}} 至 {{item.orders.end}}</view>
+            </view>
+          </van-cell>
         </view>
       </van-cell-group>
 
     </scroll-view>
-      
+
   </van-tab>
 
-  <van-tab title="密码次数钥匙">内容 2
-
+  <van-tab title="密码次数钥匙">
+    <view class="form">
+    <text style="margin-top: 100px;text-align: center;color: #000000;font-size: 22px;font-weight: bold;height: 10px;">请站在门锁旁，输入开锁密码</text>
+        <view style="margin-top: 100px;height: 100px;width: 350px;">
+        <van-cell-group>
+          <van-field model:value="{{ password }}" clearable label="开门密码" placeholder="请输入8位开锁密码" maxlength="8"/>
+        </van-cell-group>
+      </view>
+      <view style="height: 50px;width: 200px;">
+        <van-button type="info" size="large" round bindtap="pwdunlock">开门</van-button>
+      </view>
+   </view>
   </van-tab>
 
 </van-tabs>

@@ -1,6 +1,6 @@
 {
   "pages": [
-    "pages/given/given",
+    
     "pages/index/index",
     "pages/mine/mine",
     "custom-tab-bar/index",
@@ -11,7 +11,7 @@
     "pages/addfang/addfang",
     "pages/addroom/addroom",
     "pages/room/room",
-    
+    "pages/given/given",
     "pages/givekey/givekey",
     "pages/editroom/editroom",
     "pages/record/record",

@@ -14,11 +14,19 @@
     </view>
   </view>
   <van-cell-group style="margin-top:50px;">
-    <van-cell title="修改名称"  icon="edit"/>
-    <van-cell title="修改密码"  icon="lock"/>
+    <van-cell title="修改密码"  icon="lock" bindtap="changepwd"/>
     <van-cell title="退出登陆"  icon="close" bindtap="unload" />
 
   </van-cell-group>
 
 
 </view>
+
+<van-toast id="van-toast" />
+<van-dialog id="van-dialog" />
+<van-dialog use-slot show="{{ showchangepwd }}" title="修改密码" show-cancel-button  bind:confirm="tochangepwd">
+  <van-cell-group>
+        <van-field model:value="{{ oldpwd }}"  label="原密码" placeholder="请输入原密码"  />
+        <van-field model:value="{{ newpwd }}"  label="新密码" placeholder="8-16位字母、数字的新密码"  />
+      </van-cell-group>
+</van-dialog>

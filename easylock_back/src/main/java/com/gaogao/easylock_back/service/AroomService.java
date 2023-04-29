@@ -29,6 +29,9 @@ public class AroomService {
         }
         return true;
     }
+    public Aroom findbyrid(Integer rid){
+        return aroomMapper.getroombyid(rid);
+    }
     public boolean isExist2(@RequestBody Aroom aroom){
         //修改房间信息时判断用户名是否存在
         Aroom res = aroomMapper.isexist2(aroom.getRoomnum(),aroom.getFid(),aroom.getRid());

@@ -52,6 +52,23 @@ public class OwnerController {
             return 0;
         return ownerService.save(owner);
     }
+    @PostMapping("/changepwd")
+    public Result<?> changepwd(@RequestParam Integer  oid,@RequestParam String  oldpwd,@RequestParam String  newpwd) {
+        Owner res= ownerMapper.selectByIdAndPwd(oid,oldpwd);
+        if(res==null){
+            return Result.error("0","原密码错误！");
+        }
+        else{
+            Owner owner=new Owner();
+            owner.setOid(oid);
+            owner.setPasswd(newpwd);
+            if(ownerService.save(owner)==0){
+                return Result.error("0","修改失败！");
+            }
+            else
+                return Result.success("1","修改成功！");
+        }
+    }
     //删除用户，路径里的cid就是参数的oid
     @DeleteMapping("/delete/{oid}")
     public Integer delete(@PathVariable Integer oid){

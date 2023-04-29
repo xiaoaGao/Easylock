@@ -1,5 +1,6 @@
 package com.gaogao.easylock_back.mapper;
 
+import com.gaogao.easylock_back.entity.Customer;
 import com.gaogao.easylock_back.entity.Owner;
 import org.apache.ibatis.annotations.*;
 
@@ -28,4 +29,6 @@ public interface OwnerMapper {
 
     @Select("SELECT * FROM owner where username=#{username} and passwd=#{passwd}")
     Owner selectOnetoLogin(@Param("username") String username,@Param("passwd") String passwd);
+    @Select("SELECT * FROM owner where oid=#{oid} and passwd=#{passwd}")
+    Owner selectByIdAndPwd(@Param("oid") Integer cid, @Param("passwd") String passwd);
 }

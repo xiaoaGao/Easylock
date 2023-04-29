@@ -1,1 +1,15 @@
-/* pages/cust_home/cust_home.wxss */
+
+/* pages/login/login.wxss */
+page{
+  height: 100%;
+}
+.form{
+  display: flex;
+  flex-direction : column; 
+  height: 100%;
+  width: 100%;
+  /* background-color: pink; */
+  justify-content: space-evenly;         
+  align-items:center;    
+  text-align: center;            
+}
