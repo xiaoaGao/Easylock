@@ -1,7 +1,9 @@
 package com.gaogao.easylock_back.controller;
 
+import com.gaogao.easylock_back.common.BCrypt;
 import com.gaogao.easylock_back.common.Result;
 import com.gaogao.easylock_back.entity.Customer;
+import com.gaogao.easylock_back.entity.Owner;
 import com.gaogao.easylock_back.entity.roomporder;
 import com.gaogao.easylock_back.mapper.CustomerMapper;
 import com.gaogao.easylock_back.service.CustomerService;
@@ -38,15 +40,16 @@ public class CustomerController {
     @PostMapping("/login")
     public Result<?> login(@RequestBody Customer customer) {
         //登陆
-        if (customerService.isExist(customer)) {
-            Customer res = customerMapper.selectOnetoLogin(customer.getUsername(), customer.getPasswd());
-            if (res == null) {
-                return Result.error("-1", "用户名或密码错误！");
+        Customer dbcustomer=customerService.getByusername(customer);
+        if (dbcustomer!=null) {
+//            Customer res = customerMapper.selectOnetoLogin(customer.getUsername(), customer.getPasswd());
+            if (!BCrypt.checkpw(customer.getPasswd(),dbcustomer.getPasswd())) {
+                return Result.error("0", "用户名或密码错误！");
             } else {
-                return Result.success(res, "登陆成功！");
+                return Result.success(dbcustomer, "登陆成功！");
             }
         } else {
-            return Result.error("-1", "用户名不存在！");
+            return Result.error("0", "用户名不存在！");
         }
     }
 
@@ -60,22 +63,21 @@ public class CustomerController {
     @PostMapping("/changepwd")
     public Result<?> changepwd(@RequestParam Integer  cid,@RequestParam String  oldpwd,@RequestParam String  newpwd) {
         //修改信息，cid字段需要有值
-
-        Customer res= customerMapper.selectByIdAndPwd(cid,oldpwd);
-        if(res==null){
+        Customer dbcustomer=customerMapper.selectOneBycid(cid);//根据id获取数据库中的信息
+//        Customer res= customerMapper.selectByIdAndPwd(cid,oldpwd);
+        if(!BCrypt.checkpw(oldpwd,dbcustomer.getPasswd())){
             return Result.error("0","原密码错误！");
         }
         else{
-            Customer customer=new Customer();
-            customer.setCid(cid);
-            customer.setPasswd(newpwd);
-            if(customerService.save(customer)==0){
+            dbcustomer.setPasswd(newpwd);
+            if(customerService.save(dbcustomer)==0){
                 return Result.error("0","修改失败！");
             }
             else
                 return Result.success("1","修改成功！");
         }
     }
+
     //删除用户，路径里的cid就是参数的cid
     @DeleteMapping("/delete/{cid}")
     public Integer delete(@PathVariable Integer cid) {

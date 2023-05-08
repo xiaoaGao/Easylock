@@ -28,6 +28,9 @@ public interface CustomerMapper {
     @Select("SELECT * FROM CUSTOMER where username=#{username}")
     Customer selectOneByusername(@Param("username") String username);
 
+    @Select("SELECT * FROM CUSTOMER where cid=#{cid}")
+    Customer selectOneBycid(@Param("cid") Integer cid);
+
     @Select("SELECT * FROM customer where username=#{username} and passwd=#{passwd}")
     Customer selectOnetoLogin(@Param("username") String username, @Param("passwd") String passwd);
 

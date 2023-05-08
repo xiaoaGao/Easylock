@@ -1,5 +1,6 @@
 package com.gaogao.easylock_back.controller;
 
+import com.gaogao.easylock_back.common.BCrypt;
 import com.gaogao.easylock_back.common.Result;
 import com.gaogao.easylock_back.entity.Customer;
 import com.gaogao.easylock_back.entity.Owner;
@@ -32,17 +33,18 @@ public class OwnerController {
     @PostMapping("/login")
     public Result<?> login(@RequestBody Owner owner){
         //登陆
-        if (ownerService.isExist(owner)){
-            Owner res = ownerMapper.selectOnetoLogin(owner.getUsername(),owner.getPasswd());
-            if(res==null){
-                return Result.error("-1","用户名或密码错误！");
+        Owner dbowner=ownerService.getByusername(owner);
+        if (dbowner!=null){
+//            Owner res = ownerMapper.selectOnetoLogin(owner.getUsername(),owner.getPasswd());
+            if(!BCrypt.checkpw(owner.getPasswd(),dbowner.getPasswd())){
+                return Result.error("0","用户名或密码错误！");
             }
             else{
-                return Result.success(res,"登陆成功！");
+                return Result.success(dbowner,"登陆成功！");
             }
         }
         else{
-            return Result.error("-1","用户名不存在！");
+            return Result.error("0","用户名不存在！");
         }
     }
     @PostMapping("/xiugai")
@@ -54,15 +56,17 @@ public class OwnerController {
     }
     @PostMapping("/changepwd")
     public Result<?> changepwd(@RequestParam Integer  oid,@RequestParam String  oldpwd,@RequestParam String  newpwd) {
-        Owner res= ownerMapper.selectByIdAndPwd(oid,oldpwd);
-        if(res==null){
+        Owner dbowner=ownerMapper.selectOneByoid(oid);//根据id获取数据库中的信息
+
+//        Owner res= ownerMapper.selectByIdAndPwd(oid,oldpwd);
+        if(!BCrypt.checkpw(oldpwd,dbowner.getPasswd())){
+            //原密码不正确
             return Result.error("0","原密码错误！");
         }
         else{
-            Owner owner=new Owner();
-            owner.setOid(oid);
-            owner.setPasswd(newpwd);
-            if(ownerService.save(owner)==0){
+
+            dbowner.setPasswd(newpwd);
+            if(ownerService.save(dbowner)==0){
                 return Result.error("0","修改失败！");
             }
             else

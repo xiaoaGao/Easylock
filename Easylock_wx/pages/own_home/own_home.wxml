@@ -1,4 +1,4 @@
-<van-nav-bar title="在住：{{zaizhu}} 空房：{{kongfang}}" left-text="添加小区" right-text="刷新" bind:click-left="onClickLeft" bind:click-right="shuaxin" />
+<van-nav-bar  title="在住：{{zaizhu}} 空房：{{kongfang}}" left-text="添加小区" right-text="刷新" bind:click-left="onClickLeft" bind:click-right="shuaxin" />
 <van-collapse value="{{ activeNames }}" bind:change="onChange">
   <view wx:for="{{fangyuans}}" wx:for-index="index" wx:for-item="item">
     <van-collapse-item title="{{item.fname}}" name="{{index}}" >

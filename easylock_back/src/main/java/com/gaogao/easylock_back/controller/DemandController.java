@@ -54,7 +54,7 @@ public class DemandController {
         Orders o = ordersService.getorderByid(demand.getOrdid());
         if (o == null)
             return Result.error("0", "参数错误！");
-        int i = demand.getNote();
+//        long i = demand.getNote();
         //判断请求延长的日期是否合法，若不合法则不允许
         givenorder g = new givenorder();
         g.setRid(o.getRid());
@@ -63,11 +63,14 @@ public class DemandController {
         Date newdate = date;
         newdate.setTime(endtime + 1000);//结束时间加1秒，防止服务查到自己这个订单
         g.setStart(newdate);
-        newdate.setTime(endtime + i * 60 * 60 * 24*1000);//结束时间加i天，看延长了i天是否合法
-        g.setEnd(newdate);
-        if (!ordersService.islegal(g)) {
-            return Result.error("0", "该期限内房间已经被无法提供给您！");
+        for(int i=1;i<=demand.getNote();i++){
+            newdate.setTime(endtime + i * 60 * 60 * 24*1000);//结束时间加i天，看延长了i天是否合法
+            g.setEnd(newdate);
+            if (!ordersService.islegal(g)) {
+                return Result.error("0", "该期限内房间已经无法提供给您！");
+            }
         }
+
         int res = demandService.save(demand);
         if (res == 0)
             return Result.success("0", "请求失败！");
@@ -94,7 +97,7 @@ public class DemandController {
             Orders o = ordersService.getorderByid(demand.getOrdid());
             if (o == null)
                 return Result.error("0", "参数错误！");
-            int i = demand.getNote();
+//            int i = demand.getNote();
             //判断请求延长的日期是否合法，若不合法则不允许
             givenorder g = new givenorder();
             g.setRid(o.getRid());
@@ -103,10 +106,12 @@ public class DemandController {
             Date newdate = date;
             newdate.setTime(endtime + 1000);//结束时间加1秒，防止服务查到自己这个订单
             g.setStart(newdate);
-            newdate.setTime(endtime + i * 60 * 60 * 24* 1000);//结束时间加i天，看延长了i天是否合法
-            g.setEnd(newdate);
-            if (!ordersService.islegal(g)) {
-                return Result.error("0", "该段时间的钥匙已被分配，请拒绝该请求或删除已分配的钥匙！");
+            for(int i=1;i<=demand.getNote();i++){
+                newdate.setTime(endtime + i * 60 * 60 * 24*1000);//结束时间加i天，看延长了i天是否合法
+                g.setEnd(newdate);
+                if (!ordersService.islegal(g)) {
+                    return Result.error("0", "该段时间的钥匙已被分配，请拒绝该请求或删除已分配的钥匙！");
+                }
             }
             demand.setDone(1);//设置完成
             int res = demandService.save(demand);

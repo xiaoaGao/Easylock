@@ -24,6 +24,9 @@ public interface OwnerMapper {
     @Select("SELECT * FROM owner where username=#{username}")
     Owner selectOneByusername(@Param("username") String username);
 
+    @Select("SELECT * FROM owner where oid=#{oid}")
+    Owner selectOneByoid(@Param("oid") Integer oid);
+
     @Select("SELECT * FROM owner where phone=#{phone}")
     Owner selectOneByphone(@Param("phone") String phone);
 

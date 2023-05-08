@@ -40,6 +40,10 @@ public class OrdersService {
                 return false;
             if(daycontain(given.getEnd(),o.getStart(),o.getEnd()))
                 return false;
+            if(daycontain(o.getEnd(),given.getStart(),given.getEnd()))
+                return false;
+            if(daycontain(o.getStart(),given.getStart(),given.getEnd()))
+                return false;
         }
         return true;
     }

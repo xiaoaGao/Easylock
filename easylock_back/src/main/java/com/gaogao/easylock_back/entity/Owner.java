@@ -15,4 +15,5 @@ public class Owner {
     private String gender;
     private String idnum;
     private String phone;
+
 }

@@ -77,7 +77,6 @@ Page({
   },
   // 每个tabbar页面要加
   onShow: function () {
-    console.log('mine')
     this.getTabBar().init(0);
   },
 

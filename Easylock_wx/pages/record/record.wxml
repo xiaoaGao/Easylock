@@ -1,4 +1,4 @@
-<view style="height: 40px;margin: 20px;font-size:20px;color: #333333;">开锁记录</view>
+<view style="height: 40px;margin: 20px;font-size:20px;color: #333333;">开门记录</view>
 
 <scroll-view enhanced :show-scrollbar="false">
   <van-cell-group inset>

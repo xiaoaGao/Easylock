@@ -27,7 +27,7 @@ Component({
   },
   attached(){
     const that=this;
-    const status=wx.getStorageSync('status');
+    var status=wx.getStorageSync('status');
     if(status==1){
       that.setData({
         list:that.data.cust_list

@@ -39,36 +39,59 @@ Page({
     
   },
   //时间选择器
-  onstart(event) {
-    //精准时间选择器，时分秒
-    this.setData({
-      starttime: event.detail,
-    });
+  // onstart(event) {
+  //   //精准时间选择器，时分秒
+  //   this.setData({
+  //     starttime: event.detail,
+  //   });
+  // },
+  // onend(event) {
+  //   //精准时间选择器，时分秒
+  //   this.setData({
+  //     endtime: event.detail,
+  //   });
+  // },
+  closedatepicker(){
+    var that= this
+    that.setData({
+      startpicshow:false,
+      endpicshow:false
+    })
   },
-  onend(event) {
-    //精准时间选择器，时分秒
-    this.setData({
-      endtime: event.detail,
-    });
-  },
-  confirmstart(){
+  confirmstart(event){
     var that= this
     that.setData({
       startpicshow:false,
       endpicshow:false,
-      starttimeformat:that.formatDateTime(that.data.starttime)
+      starttimeformat:that.formatDateTime(event.detail)
     })
-    console.log(that.data.starttime)
   },
-  confirmend(){
+  confirmend(event){
     var that= this
     that.setData({
       startpicshow:false,
       endpicshow:false,
-      endtimeformat:that.formatDateTime(that.data.endtime)
+      endtimeformat:that.formatDateTime(event.detail)
     })
-    console.log(that.data.endtime)
   },
+  // confirmstart(){
+  //   var that= this
+  //   that.setData({
+  //     startpicshow:false,
+  //     endpicshow:false,
+  //     starttimeformat:that.formatDateTime(that.data.starttime)
+  //   })
+  //   console.log(that.data.starttime)
+  // },
+  // confirmend(){
+  //   var that= this
+  //   that.setData({
+  //     startpicshow:false,
+  //     endpicshow:false,
+  //     endtimeformat:that.formatDateTime(that.data.endtime)
+  //   })
+  //   console.log(that.data.endtime)
+  // },
   Displaystartpick(){
     var that=this
     that.setData({
@@ -83,7 +106,13 @@ Page({
       endpicshow:true
     })
   },
-  //
+  //有效次数选择
+  validtimechange(e){
+    var that = this
+    that.setData({
+      validtimes:e.detail
+    })
+  },
   newrandomkey(){
     //生成随机密码
     var that = this
@@ -274,6 +303,9 @@ Page({
             })
             wx.navigateBack() //返回上一层
         } 
+        else{
+          Toast(res.data.msg)
+        }
     }})
   },
   validPhone(phone) { //判断手机号是否合法

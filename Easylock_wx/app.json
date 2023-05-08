@@ -1,6 +1,5 @@
 {
   "pages": [
-    
     "pages/index/index",
     "pages/mine/mine",
     "custom-tab-bar/index",
@@ -19,7 +18,8 @@
     "pages/cust_demand/cust_demand",
     "pages/mydemand/mydemand",
     "pages/roomdemand/roomdemand",
-    "pages/roomdemands/roomdemands"
+    "pages/roomdemands/roomdemands",
+    "pages/csgivepwd/csgivepwd"
   ],
   "window": {
     "backgroundTextStyle": "light",

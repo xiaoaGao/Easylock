@@ -30,7 +30,7 @@
           <view class="van-cell-text">选择钥匙有效次数:</view>
         </view>
         <view class="van-cell-text">
-          <van-stepper disable-input value="{{ validtimes }}" bind:change="stepchange" max="3" long-press="false" />
+          <van-stepper disable-input value="{{ validtimes }}" bind:change="validtimechange" max="5" long-press="false" />
         </view>
       </van-cell>
       <!-- <van-cell title="选择密码有效日期" value="{{ day }}" bind:click="DisplayCalendar" /> -->
@@ -41,8 +41,8 @@
       <!-- <van-calendar color="#004299" show="{{ calendarshow }}" type="range" bind:close="onClose" bind:confirm="onConfirm" /> -->
     </van-cell-group>
     <van-button color="#004299" size="large" round bindtap="newrandomkey">生成随机密码</van-button>
-    <van-datetime-picker item-height="20" type="datetime" wx:if="{{ startpicshow }}" value="{{ starttime }}" min-date="{{ minDate }}" bind:input="onstart" bind:confirm="confirmstart"/>
-    <van-datetime-picker item-height="20" type="datetime" wx:if="{{ endpicshow }}" value="{{ endtime }}" min-date="{{ minDate }}" bind:input="onend" bind:confirm="confirmend"/>
+    <van-datetime-picker item-height="20" type="datetime" title="密码开始生效时间"wx:if="{{ startpicshow }}" value="{{ starttime }}" min-date="{{ minDate }}" bind:input="onstart" bind:confirm="confirmstart" bind:cancel="closedatepicker"/>
+    <van-datetime-picker item-height="20" type="datetime" title="密码结束生效时间"wx:if="{{ endpicshow }}" value="{{ endtime }}" min-date="{{ minDate }}" bind:input="onend" bind:confirm="confirmend" bind:cancel="closedatepicker"/>
   </van-tab>
 
 </van-tabs>

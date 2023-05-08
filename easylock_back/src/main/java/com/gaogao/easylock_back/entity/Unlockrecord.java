@@ -13,7 +13,7 @@ import java.util.Date;
 public class Unlockrecord {
     private Integer id;
     private Integer rid;
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Date time;
     private Integer type;
     private String realname;
